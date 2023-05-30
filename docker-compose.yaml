@@ -1,0 +1,9 @@
+services:
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    container_name: mssql-server
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password.1234"
+    ports:
+      - "1433:1433" 
