@@ -7,4 +7,16 @@ services:
       SA_PASSWORD: "Password.1234"
     ports:
       - "1433:1433"
-    
+  mytask-api:
+    build: ./MyTask.API/MyTask.API/
+    container_name: mytask-api
+    environment:
+      DatabaseServer: "mssql-server"
+      DatabasePort: "1433"
+      DatabaseUser: "sa"
+      DatabasePassword: "Password.1234"
+      DatabaseName: "MyTask_DB"
+    depends_on:
+      - mssql-server
+    ports:
+      - "8090:80"
