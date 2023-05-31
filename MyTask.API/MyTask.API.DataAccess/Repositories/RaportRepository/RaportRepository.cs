@@ -16,7 +16,7 @@ public class RaportRepository : IRaportRepository
     {
         try
         {
-            await _context.Raports.AddAsync(raport);
+            await _context.Raports.AddAsync((Raport)raport);
             return true;
         }
         catch (Exception ex)
@@ -44,7 +44,7 @@ public class RaportRepository : IRaportRepository
     {
         try
         {
-            var raports = await _context.Raports.ToListAsync();
+            var raports = await _context.Raports.ToListAsync<IRaport>();
             return raports;
         }
         catch (Exception ex)

@@ -16,7 +16,7 @@ public class TaskRepository : ITaskRepository
     {
         try
         {
-            await _context.Tasks.AddAsync(task);
+            await _context.Tasks.AddAsync((_Task)task);
             return true;
         }
         catch (Exception ex)
@@ -58,7 +58,7 @@ public class TaskRepository : ITaskRepository
         try
         {
             var tasks = _context.Tasks.Where(t => t.ProjectId == projectId);
-            return await tasks.ToListAsync();
+            return await tasks.ToListAsync<ITask>();
         }
         catch (Exception ex)
         {

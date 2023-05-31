@@ -22,4 +22,9 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MyTask.API.DataAccess\MyTask.API.DataAccess.csproj" />
+      <ProjectReference Include="..\MyTask.API.Services\MyTask.API.Services.csproj" />
+    </ItemGroup>
+
 </Project>

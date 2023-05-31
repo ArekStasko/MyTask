@@ -16,7 +16,7 @@ public class ProjectRepository : IProjectRepository
     {
         try
         {
-            await _context.Projects.AddAsync(project);
+            await _context.Projects.AddAsync((Project)project);
             await _context.SaveChangesAsync();
             return true;
         }
@@ -45,7 +45,7 @@ public class ProjectRepository : IProjectRepository
     {
         try
         {
-            var projects = await _context.Projects.ToListAsync();
+            var projects = await _context.Projects.ToListAsync<IProject>();
             return projects;
         }
         catch (Exception ex)

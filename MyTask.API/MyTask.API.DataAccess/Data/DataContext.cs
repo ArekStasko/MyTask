@@ -10,11 +10,11 @@ public class DataContext : DbContext
     public DataContext(){}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=172.26.192.1,1433;Database=MyTask_DB;User Id=sa;Password=Password.1234");
+        optionsBuilder.UseSqlServer();
     }
 
-    public virtual DbSet<IProject> Projects { get; set; }
-    public virtual DbSet<IRaport> Raports { get; set; }
-    public virtual DbSet<ITask>  Tasks { get; set; }
+    public virtual DbSet<Project> Projects { get; set; }
+    public virtual DbSet<Raport> Raports { get; set; }
+    public virtual DbSet<_Task>  Tasks { get; set; }
 
 }

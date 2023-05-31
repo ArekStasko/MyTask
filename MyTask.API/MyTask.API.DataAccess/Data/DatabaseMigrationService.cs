@@ -1,8 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MyTask.API.DataAccess.Data;
 
 public class DatabaseMigrationService
 {
-    public static void MigrationInitialization(DataContext context) => context.Database.Migrate();
+    internal static void MigrationInitialization(IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+            serviceScope.ServiceProvider.GetService<DataContext>().Database.Migrate();
+        }
+    }
 }
