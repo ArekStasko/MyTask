@@ -7,10 +7,10 @@ namespace MyTask.API.DataAccess.Services.RepositoriesFactory;
 
 public class RepositoriesFactory
 {
-    //This datacontext initialize is only for development purposes
-    public static IProjectRepository GetProjectRepo() => new ProjectRepository(new DataContext());
+    //TODO: IMPLEMENT CONTAINER
+    //public static IProjectRepository GetProjectRepo() => new ProjectRepository(new DataContext());
 
-    public static IRaportRepository GetRaportRepo() => new RaportRepository(new DataContext());
+    //public static IRaportRepository GetRaportRepo() => new RaportRepository(new DataContext());
 
-    public static ITaskRepository GetTaskRepo() => new TaskRepository(new DataContext());
+    //public static ITaskRepository GetTaskRepo() => new TaskRepository(new DataContext());
 }
