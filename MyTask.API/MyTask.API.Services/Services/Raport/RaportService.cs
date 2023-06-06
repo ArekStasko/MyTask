@@ -8,19 +8,19 @@ namespace MyTask.API.Services.Services.RaportControllers;
 
 public class RaportService : IRaportService
 {
-    private readonly IRaportProcFactory _ProcessorFactory;
+    private readonly IRaportProcFactory _processorFactory;
     private readonly IMapper _mapper;
     
-    public RaportService()
+    public RaportService(IRaportProcFactory raportProcFactory)
     {
-        _ProcessorFactory = new RaportProcFactory();
+        _processorFactory = raportProcFactory;
         _mapper = Mapping.Mapper;
     }
 
     public async Task<RaportDTO> Generate(RaportDTO raportDTO)
     {
         var raport = _mapper.Map<IRaport>(raportDTO); 
-        var processor = _ProcessorFactory.GetGenerateRaport();
+        var processor = _processorFactory.GetGenerateRaport();
         var result = await processor.Execute(raport);
         raportDTO = _mapper.Map<RaportDTO>(result);
         return raportDTO;
@@ -28,14 +28,14 @@ public class RaportService : IRaportService
 
     public async Task<bool> Delete(int id)
     {
-        var processor = _ProcessorFactory.GetDeleteRaport();
+        var processor = _processorFactory.GetDeleteRaport();
         var result = await processor.Execute(id);
         return result;
     }
 
     public async Task<List<RaportDTO>> Get()
     {
-        var processor = _ProcessorFactory.GetGetRaports();
+        var processor = _processorFactory.GetGetRaports();
         var result = await processor.Execute();
         var raportDTO = _mapper.Map<List<RaportDTO>>(result);
         return raportDTO;
@@ -43,7 +43,7 @@ public class RaportService : IRaportService
 
     public async Task<RaportDTO> GetSingle(int id)
     {
-        var processor = _ProcessorFactory.GetGetSingleRaport();
+        var processor = _processorFactory.GetGetSingleRaport();
         var result = await processor.Execute(id);
         var raportDTO = _mapper.Map<RaportDTO>(result);
         return raportDTO;

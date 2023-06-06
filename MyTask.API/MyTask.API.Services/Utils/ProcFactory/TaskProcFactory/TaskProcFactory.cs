@@ -9,13 +9,15 @@ namespace MyTask.API.Services.Services.ProcFactory.TaskProcFactory;
 
 public class TaskProcFactory : ITaskProcFactory
 {
-    //TODO IMPLEMENT AUTOMAPPER
+    private readonly ITaskRepository _repository;
+    public TaskProcFactory(ITaskRepository repository)
+    {
+        _repository = repository;
+    }
     
-    //private readonly ITaskRepository _repository = RepositoriesFactory.GetTaskRepo();
-    
-    public ICreateTask GetCreateTask() => new CreateTask(new TaskRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IDeleteTask GetDeleteTask() => new DeleteTask(new TaskRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IUpdateTask GetUpdateTask() => new UpdateTask(new TaskRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IGetTasks GetGetTasks() => new GetTask(new TaskRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IGetSingleTask GetGetSingleTask() => new GetSingleTask(new TaskRepository(new DataContext(new DbContextOptions<DataContext>())));
+    public ICreateTask GetCreateTask() => new CreateTask(_repository);
+    public IDeleteTask GetDeleteTask() => new DeleteTask(_repository);
+    public IUpdateTask GetUpdateTask() => new UpdateTask(_repository);
+    public IGetTasks GetGetTasks() => new GetTask(_repository);
+    public IGetSingleTask GetGetSingleTask() => new GetSingleTask(_repository);
 }

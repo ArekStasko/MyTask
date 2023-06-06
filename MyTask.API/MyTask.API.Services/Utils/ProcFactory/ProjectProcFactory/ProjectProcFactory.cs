@@ -9,10 +9,14 @@ namespace MyTask.API.Services.Services.ProcFactory.ProjectProcFactory;
 
 public class ProjectProcFactory : IProjectProcFactory
 {
-    //private readonly IProjectRepository _repository = RepositoriesFactory.GetProjectRepo();
+    private readonly IProjectRepository _repository;
+    public ProjectProcFactory(IProjectRepository repository)
+    {
+        _repository = repository;
+    }
     
-    public ICreateProject GetCreateProject() => new CreateProject(new ProjectRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IDeleteProject GetDeleteProject() => new DeleteProject(new ProjectRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IGetProjects GetGetProjects() => new GetProjects(new ProjectRepository(new DataContext(new DbContextOptions<DataContext>())));
-    public IGetSingleProject GetGetSingleProject() => new GetSingleProject(new ProjectRepository(new DataContext(new DbContextOptions<DataContext>())));
+    public ICreateProject GetCreateProject() => new CreateProject(_repository);
+    public IDeleteProject GetDeleteProject() => new DeleteProject(_repository);
+    public IGetProjects GetGetProjects() => new GetProjects(_repository);
+    public IGetSingleProject GetGetSingleProject() => new GetSingleProject(_repository);
 }

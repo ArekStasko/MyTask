@@ -9,12 +9,12 @@ namespace MyTask.API.Services.Services.ProjectService;
 
 public class ProjectService : IProjectService
 {
-    private readonly IProjectProcFactory _ProcessorFactory;
+    private readonly IProjectProcFactory _processorFactory;
     private readonly IMapper _mapper;
 
-    public ProjectService()
+    public ProjectService(IProjectProcFactory processorFactory)
     {
-        _ProcessorFactory = new ProjectProcFactory();
+        _processorFactory = processorFactory;
         _mapper = Mapping.Mapper;
     }
 
@@ -22,7 +22,7 @@ public class ProjectService : IProjectService
     public async Task<ProjectDTO> Create(ProjectDTO projectDTO)
     {
         IProject project = _mapper.Map<IProject>(projectDTO);
-        var processor = _ProcessorFactory.GetCreateProject();
+        var processor = _processorFactory.GetCreateProject();
         var result = await processor.Execute(project);
 
         projectDTO = _mapper.Map<ProjectDTO>(result);
@@ -31,14 +31,14 @@ public class ProjectService : IProjectService
 
     public async Task<bool> Delete(int id)
     {
-        var processor = _ProcessorFactory.GetDeleteProject();
+        var processor = _processorFactory.GetDeleteProject();
         var result = await processor.Execute(id);
         return result;
     }
 
     public async Task<List<ProjectDTO>> Get()
     {
-        var processor = _ProcessorFactory.GetGetProjects();
+        var processor = _processorFactory.GetGetProjects();
         var result = await processor.Execute();
         var projectsDTO = _mapper.Map<List<ProjectDTO>>(result);
         return projectsDTO;
@@ -46,7 +46,7 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectDTO> GetSingle(int id)
     {
-        var processor = _ProcessorFactory.GetGetSingleProject();
+        var processor = _processorFactory.GetGetSingleProject();
         var result = await processor.Execute(id);
         var projectDTO = _mapper.Map<ProjectDTO>(result);
         return projectDTO;
