@@ -12,10 +12,10 @@ public class ProjectService : IProjectService
     private readonly IProjectProcFactory _processorFactory;
     private readonly IMapper _mapper;
 
-    public ProjectService(IProjectProcFactory processorFactory)
+    public ProjectService(IProjectProcFactory processorFactory, IMapper mapper)
     {
         _processorFactory = processorFactory;
-        _mapper = Mapping.Mapper;
+        _mapper = mapper;
     }
 
 
@@ -40,15 +40,15 @@ public class ProjectService : IProjectService
     {
         var processor = _processorFactory.GetGetProjects();
         var result = await processor.Execute();
-        var projectsDTO = _mapper.Map<List<ProjectDTO>>(result);
-        return projectsDTO;
+        var projectsDto = _mapper.Map<List<ProjectDTO>>(result);
+        return projectsDto;
     }
 
     public async Task<ProjectDTO> GetSingle(int id)
     {
         var processor = _processorFactory.GetGetSingleProject();
         var result = await processor.Execute(id);
-        var projectDTO = _mapper.Map<ProjectDTO>(result);
-        return projectDTO;
+        var projectsDto = _mapper.Map<ProjectDTO>(result);
+        return projectsDto;
     }
 }

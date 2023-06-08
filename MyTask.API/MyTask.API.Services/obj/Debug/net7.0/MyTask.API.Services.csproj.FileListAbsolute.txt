@@ -1,0 +1,15 @@
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\bin\Debug\net7.0\MyTask.API.Services.deps.json
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\bin\Debug\net7.0\MyTask.API.Services.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\bin\Debug\net7.0\MyTask.API.Services.pdb
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\bin\Debug\net7.0\MyTask.API.DataAccess.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\bin\Debug\net7.0\MyTask.API.DataAccess.pdb
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.csproj.AssemblyReference.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.AssemblyInfoInputs.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.AssemblyInfo.cs
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.csproj.CoreCompileInputs.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.csproj.CopyComplete
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\refint\MyTask.API.Services.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\MyTask.API.Services.pdb
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.Services\obj\Debug\net7.0\ref\MyTask.API.Services.dll

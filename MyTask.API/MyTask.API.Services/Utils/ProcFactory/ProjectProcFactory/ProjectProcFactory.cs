@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyTask.API.DataAccess.Data;
-using MyTask.API.Services.Processors.ProjectProcessors;
+﻿using MyTask.API.Services.Processors.ProjectProcessors;
 using MyTask.API.Services.Processors.ProjectProcessors.Interfaces;
 using MyTask.API.DataAccess.Repositories.ProjectRepository;
-using MyTask.API.DataAccess.Services.RepositoriesFactory;
 
 namespace MyTask.API.Services.Services.ProcFactory.ProjectProcFactory;
 

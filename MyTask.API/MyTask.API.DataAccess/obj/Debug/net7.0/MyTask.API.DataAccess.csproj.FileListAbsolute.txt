@@ -1,0 +1,14 @@
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\bin\Debug\net7.0\MyTask.API.DataAccess.deps.json
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\bin\Debug\net7.0\MyTask.API.DataAccess.runtimeconfig.json
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\bin\Debug\net7.0\MyTask.API.DataAccess.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\bin\Debug\net7.0\MyTask.API.DataAccess.pdb
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.csproj.AssemblyReference.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.AssemblyInfoInputs.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.AssemblyInfo.cs
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\refint\MyTask.API.DataAccess.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.pdb
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\MyTask.API.DataAccess.genruntimeconfig.cache
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API.DataAccess\obj\Debug\net7.0\ref\MyTask.API.DataAccess.dll

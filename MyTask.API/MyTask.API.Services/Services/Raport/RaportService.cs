@@ -11,10 +11,10 @@ public class RaportService : IRaportService
     private readonly IRaportProcFactory _processorFactory;
     private readonly IMapper _mapper;
     
-    public RaportService(IRaportProcFactory raportProcFactory)
+    public RaportService(IRaportProcFactory raportProcFactory, IMapper mapper)
     {
         _processorFactory = raportProcFactory;
-        _mapper = Mapping.Mapper;
+        _mapper = mapper;
     }
 
     public async Task<RaportDTO> Generate(RaportDTO raportDTO)

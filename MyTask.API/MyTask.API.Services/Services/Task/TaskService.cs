@@ -11,10 +11,10 @@ public class TaskService : ITaskService
     private readonly ITaskProcFactory _processorFactory;
     private readonly IMapper _mapper;
     
-    public TaskService(ITaskProcFactory taskProcFactory)
+    public TaskService(ITaskProcFactory taskProcFactory, IMapper mapper)
     {
         _processorFactory = taskProcFactory;
-        _mapper = Mapping.Mapper;
+        _mapper = mapper;
     }
 
     public async Task<TaskDTO> Create(TaskDTO taskDTO)
