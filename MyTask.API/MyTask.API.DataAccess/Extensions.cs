@@ -14,7 +14,7 @@ public static class DataExtensions
     {
         services.AddDbContext<DataContext>(options =>
         {
-            options.UseSqlServer("Server=172.25.224.1,1433;Database=MyTask_DB;User Id=sa;Password=Password.1234;TrustServerCertificate=true");
+            options.UseSqlServer("Server=mssql-server,1433;Database=MyTask_DB;User Id=sa;Password=Password.1234;TrustServerCertificate=true");
         });
     }
 
