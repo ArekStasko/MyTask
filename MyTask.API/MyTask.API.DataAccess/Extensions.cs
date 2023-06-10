@@ -10,11 +10,11 @@ namespace MyTask.API.DataAccess;
 
 public static class DataExtensions
 {
-    public static void AddDataContext(this IServiceCollection services)
+    public static void AddDataContext(this IServiceCollection services, string connectionString)
     {
         services.AddDbContext<DataContext>(options =>
         {
-            options.UseSqlServer("Server=mssql-server,1433;Database=MyTask_DB;User Id=sa;Password=Password.1234;TrustServerCertificate=true");
+            options.UseSqlServer(connectionString);
         });
     }
 

@@ -2,6 +2,7 @@ using MyTask.API.DataAccess;
 using MyTask.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 
@@ -9,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDataContext();
+builder.Services.AddDataContext(connectionString);
 builder.Services.AddRepositories();
 builder.Services.AddMappings();
 builder.Services.AddProcessors();
