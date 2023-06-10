@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "4bdd70c2-d39f-4e0a-8427-43dcbb4866aa",
+		"name": "MyTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11070618"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetSingle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}projects/GetSingle?id={{ProjectId}}",
+							"host": [
+								"{{BaseURL}}projects"
+							],
+							"path": [
+								"GetSingle"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{ProjectId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}projects/Create"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}projects/Delete?id={{ProjectId}}",
+							"host": [
+								"{{BaseURL}}projects"
+							],
+							"path": [
+								"Delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{ProjectId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raports",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BaseURL}}raports/Get"
+					},
+					"response": []
+				},
+				{
+					"name": "GetSingle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}raports/GetSingle?id={{RaportId}}",
+							"host": [
+								"{{BaseURL}}raports"
+							],
+							"path": [
+								"GetSingle"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{RaportId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"openTasks\": 0,\r\n  \"inProgressTasks\": 0,\r\n  \"doneTasks\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}raports/Generate"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}raports/Delete?id={{RaportId}}",
+							"host": [
+								"{{BaseURL}}raports"
+							],
+							"path": [
+								"Delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{RaportId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}tasks/Get?id={{ProjectId}}",
+							"host": [
+								"{{BaseURL}}tasks"
+							],
+							"path": [
+								"Get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{ProjectId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSingle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}tasks/GetSingle?id={{TaskId}}",
+							"host": [
+								"{{BaseURL}}tasks"
+							],
+							"path": [
+								"GetSingle"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{TaskId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}tasks/Delete?id={{TaskId}}",
+							"host": [
+								"{{BaseURL}}tasks"
+							],
+							"path": [
+								"Delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{TaskId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"projectId\": 0,\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"state\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}tasks/Create"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"projectId\": 0,\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"state\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BaseURL}}tasks/Update"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
