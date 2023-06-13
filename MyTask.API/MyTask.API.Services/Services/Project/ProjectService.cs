@@ -21,7 +21,7 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectDTO> Create(ProjectDTO projectDTO)
     {
-        IProject project = _mapper.Map<IProject>(projectDTO);
+        IProject project = _mapper.Map<Project>(projectDTO);
         var processor = _processorFactory.GetCreateProject();
         var result = await processor.Execute(project);
 

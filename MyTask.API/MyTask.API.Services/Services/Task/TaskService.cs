@@ -19,7 +19,7 @@ public class TaskService : ITaskService
 
     public async Task<TaskDTO> Create(TaskDTO taskDTO)
     {
-        var task = _mapper.Map<ITask>(taskDTO);
+        ITask task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetCreateTask();
         var result = await processor.Execute(task);
         taskDTO = _mapper.Map<TaskDTO>(result);

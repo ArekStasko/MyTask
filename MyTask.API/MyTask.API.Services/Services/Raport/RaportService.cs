@@ -19,7 +19,7 @@ public class RaportService : IRaportService
 
     public async Task<RaportDTO> Generate(RaportDTO raportDTO)
     {
-        var raport = _mapper.Map<IRaport>(raportDTO); 
+        IRaport raport = _mapper.Map<Raport>(raportDTO); 
         var processor = _processorFactory.GetGenerateRaport();
         var result = await processor.Execute(raport);
         raportDTO = _mapper.Map<RaportDTO>(result);
