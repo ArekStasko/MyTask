@@ -35,7 +35,7 @@ public class TaskService : ITaskService
 
     public async Task<TaskDTO> Update(TaskDTO taskDTO)
     {
-        var task = _mapper.Map<ITask>(taskDTO);
+        var task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetUpdateTask();
         var result = await processor.Execute(task);
         taskDTO = _mapper.Map<TaskDTO>(result);

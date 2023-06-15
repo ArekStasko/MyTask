@@ -17,6 +17,7 @@ public class TaskRepository : ITaskRepository
         try
         {
             await _context.Tasks.AddAsync((_Task)task);
+            await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
@@ -31,6 +32,7 @@ public class TaskRepository : ITaskRepository
         {
             var task = await _context.Tasks.SingleAsync(t => t.Id == id);
             _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
@@ -43,9 +45,14 @@ public class TaskRepository : ITaskRepository
     {
         try
         {
-            await Delete(task.Id);
-            await Create(task);
-            return task;
+            var taskToUpdate = await _context.Tasks.SingleAsync(t => t.Id == task.Id);
+
+            taskToUpdate.Name = task.Name;
+            taskToUpdate.Description = task.Name;
+            taskToUpdate.State = task.State;
+            
+            await _context.SaveChangesAsync();
+            return taskToUpdate;
         }
         catch (Exception ex)
         {

@@ -19,13 +19,13 @@ public class AutoMapperProfile : Profile
         CreateMap<RaportDTO, Raport>();
         CreateMap<ProjectDTO, Project>();
 
-        CreateMap<Task, TaskDTO>();
+        CreateMap<_Task, TaskDTO>();
         CreateMap<Raport, RaportDTO>();
         CreateMap<Project, ProjectDTO>();
         
 
-        CreateMap<List<Task>, List<TaskDTO>>()
-            .ConvertUsing((source, destination, context) => context.Mapper.Map<List<Task>, List<TaskDTO>>(source));
+        CreateMap<List<_Task>, List<TaskDTO>>()
+            .ConvertUsing((source, destination, context) => context.Mapper.Map<List<_Task>, List<TaskDTO>>(source));
         CreateMap<List<Raport>, List<RaportDTO>>()
             .ConvertUsing((source, destination, context) => context.Mapper.Map<List<Raport>, List<RaportDTO>>(source));
         CreateMap<List<Project>, List<ProjectDTO>>()

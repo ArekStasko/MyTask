@@ -17,6 +17,7 @@ public class RaportRepository : IRaportRepository
         try
         {
             await _context.Raports.AddAsync((Raport)raport);
+            await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
