@@ -18,9 +18,9 @@ public class RaportController : ControllerBase
     [HttpPost(Name = "GenerateRaport")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RaportDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
-    public async Task<ActionResult<bool>> Generate(RaportDTO raportDto)
+    public async Task<ActionResult<RaportDTO>> Generate([FromQuery] int projectId)
     {
-        var result = await _raportService.Generate(raportDto);
+        var result = await _raportService.Generate(projectId);
         return Ok(result);
     }
 

@@ -17,12 +17,11 @@ public class RaportService : IRaportService
         _mapper = mapper;
     }
 
-    public async Task<RaportDTO> Generate(RaportDTO raportDTO)
+    public async Task<RaportDTO> Generate(int projectId)
     {
-        IRaport raport = _mapper.Map<Raport>(raportDTO); 
         var processor = _processorFactory.GetGenerateRaport();
-        var result = await processor.Execute(raport);
-        raportDTO = _mapper.Map<RaportDTO>(result);
+        var result = await processor.Execute(projectId);
+        var raportDTO = _mapper.Map<RaportDTO>(result);
         return raportDTO;
     }
 
