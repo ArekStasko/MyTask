@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyTask.API.Services.DTO;
 using MyTask.API.Services.Services.RaportControllers;
 
@@ -15,6 +16,7 @@ public class RaportController : ControllerBase
         _raportService = raportService;
     }
 
+    [Authorize]
     [HttpPost(Name = "GenerateRaport")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RaportDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -24,6 +26,7 @@ public class RaportController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpPost(Name = "DeleteRaport")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -33,6 +36,7 @@ public class RaportController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpGet(Name = "GetRaport")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<RaportDTO>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -42,6 +46,7 @@ public class RaportController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize]
     [HttpGet(Name = "GetSingleRaport")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RaportDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]

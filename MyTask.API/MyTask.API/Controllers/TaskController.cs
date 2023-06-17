@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyTask.API.Services.DTO;
 using MyTask.API.Services.Services.TaskControllers;
 
@@ -15,6 +16,7 @@ public class TaskController : ControllerBase
         _taskService = taskService;
     }
 
+    [Authorize]
     [HttpPost(Name = "CreateTask")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -23,7 +25,8 @@ public class TaskController : ControllerBase
         var result = await _taskService.Create(task);
         return Ok(result);
     }
-
+    
+    [Authorize]
     [HttpPost(Name = "DeleteTask")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -32,7 +35,8 @@ public class TaskController : ControllerBase
         var result = await _taskService.Delete(id);
         return Ok(result);
     }
-
+    
+    [Authorize]
     [HttpGet(Name = "GetTask")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskDTO>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -42,6 +46,7 @@ public class TaskController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpPost(Name = "UpdateTask")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -51,6 +56,7 @@ public class TaskController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpGet(Name = "GetSingleTask")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TaskDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]

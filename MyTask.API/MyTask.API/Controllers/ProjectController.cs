@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyTask.API.Services.DTO;
 using MyTask.API.Services.Services.ProjectServices;
 
@@ -14,6 +15,7 @@ public class ProjectController : ControllerBase
         _projectService = projectService;
     }
 
+    [Authorize]
     [HttpPost(Name = "CreateProject")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProjectDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -23,6 +25,7 @@ public class ProjectController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpPost(Name = "DeleteProject")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -32,6 +35,7 @@ public class ProjectController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize]
     [HttpGet(Name = "GetProject")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ProjectDTO>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
@@ -41,6 +45,7 @@ public class ProjectController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize]
     [HttpGet(Name = "GetSingleProject")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProjectDTO))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
