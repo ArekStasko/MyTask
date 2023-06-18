@@ -77,3 +77,10 @@ C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\obj\Debug\net7.0\MyTas
 C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\obj\Debug\net7.0\MyTask.API.genruntimeconfig.cache
 C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\obj\Debug\net7.0\ref\MyTask.API.dll
 C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\areks\sources\repos\MyTask\MyTask.API\MyTask.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

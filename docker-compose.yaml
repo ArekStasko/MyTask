@@ -20,3 +20,16 @@ services:
       - mssql-server
     ports:
       - "8090:80"
+  mytask-idp:
+    build: ./MyTask.IdP
+    container_name: mytask-idp
+    environment:
+      DatabaseServer: "mssql-server"
+      DatabasePort: "1433"
+      DatabaseUser: "sa"
+      DatabasePassword: "Password.1234"
+      DatabaseName: "MyTask_IdP"
+    depends_on:
+      - mssql-server
+    ports:
+      - "8080:80"
