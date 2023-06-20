@@ -30,6 +30,6 @@ services:
       DatabasePassword: "Password.1234"
       DatabaseName: "MyTask_IdP"
     depends_on:
-      - mssql-server
+      - mytask-api
     ports:
       - "8080:80"
