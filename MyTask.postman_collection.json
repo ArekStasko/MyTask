@@ -12,14 +12,27 @@
 				{
 					"name": "Get",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{BaseURL}}projects/Get"
 					},
 					"response": []
 				},
 				{
 					"name": "GetSingle",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -43,6 +56,12 @@
 				{
 					"name": "Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -61,6 +80,12 @@
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -98,8 +123,20 @@
 				{
 					"name": "Get",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiIxIiwibmJmIjoxNjg3MjgxMDYwLCJleHAiOjE2ODcyODI4NjAsImlhdCI6MTY4NzI4MTA2MH0.NDiHKyOHQt2LyZ49qkwnNGaINMKg_Z-Y32OHwLawEp0",
+								"type": "text"
+							}
+						],
 						"url": "{{BaseURL}}raports/Get"
 					},
 					"response": []
@@ -107,6 +144,12 @@
 				{
 					"name": "GetSingle",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -130,24 +173,41 @@
 				{
 					"name": "Generate",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"openTasks\": 0,\r\n  \"inProgressTasks\": 0,\r\n  \"doneTasks\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
 							}
 						},
-						"url": "{{BaseURL}}raports/Generate"
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}raports/Generate?projectId={{RaportId}}",
+							"host": [
+								"{{BaseURL}}raports"
+							],
+							"path": [
+								"Generate"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{RaportId}}"
+								}
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
@@ -176,6 +236,12 @@
 				{
 					"name": "Get",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -199,6 +265,12 @@
 				{
 					"name": "GetSingle",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -222,6 +294,12 @@
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
@@ -245,6 +323,12 @@
 				{
 					"name": "Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -263,11 +347,17 @@
 				{
 					"name": "Update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"projectId\": 0,\r\n  \"name\": \"string\",\r\n  \"description\": \"string\",\r\n  \"state\": 0\r\n}",
+							"raw": "{\r\n  \"id\": {{TaskId}},\r\n  \"projectId\": 0,\r\n  \"name\": \"dupa\",\r\n  \"description\": \"string\",\r\n  \"state\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -275,6 +365,78 @@
 							}
 						},
 						"url": "{{BaseURL}}tasks/Update"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IdP",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"Token\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{UserName}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{IdPURL}}users/Register/"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"Token\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"{{UserName}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{IdPURL}}users/Login"
 					},
 					"response": []
 				}
