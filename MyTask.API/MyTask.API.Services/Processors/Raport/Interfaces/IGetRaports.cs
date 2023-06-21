@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.RaportProcessors.Interfaces;
 
 public interface IGetRaports
 {
-    Task<List<IRaport>> Execute();
+    Task<List<IRaport>> Execute(int userId);
 }

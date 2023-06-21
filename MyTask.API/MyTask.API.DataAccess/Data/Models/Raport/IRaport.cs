@@ -6,6 +6,7 @@ public interface IRaport
 {
     [Key] 
     int Id { get; set; }
+    int UserId { get; set; }
     int OpenTasks { get; set; }
     int InProgressTasks { get; set; }
     int DoneTasks { get; set; }

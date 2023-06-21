@@ -14,12 +14,13 @@ public class CreateTask : ICreateTask
     }
 
 
-    public async Task<ITask> Execute(ITask task)
+    public async Task<ITask> Execute(ITask task, int userId)
     {
         try
         {
-            await _repository.Create(task);
-            var createdTask = await _repository.GetSingle(task.Id);
+            task.UserId = userId;
+            await _repository.Create(task, userId);
+            var createdTask = await _repository.GetSingle(task.Id, userId);
             return createdTask;
         }
         catch (Exception e)

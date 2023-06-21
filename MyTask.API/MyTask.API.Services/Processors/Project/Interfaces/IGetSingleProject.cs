@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.ProjectProcessors.Interfaces;
 
 public interface IGetSingleProject
 {
-    Task<IProject> Execute(int id);
+    Task<IProject> Execute(int id, int userId);
 }

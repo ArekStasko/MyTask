@@ -13,11 +13,11 @@ public class GetSingleTask : IGetSingleTask
         _repository = repository;
     }
 
-    public async Task<ITask> Execute(int id)
+    public async Task<ITask> Execute(int id, int userId)
     {
         try
         {
-            var task = await _repository.GetSingle(id);
+            var task = await _repository.GetSingle(id, userId);
             return task;
         }
         catch (Exception e)

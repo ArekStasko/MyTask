@@ -13,11 +13,11 @@ public class UpdateTask : IUpdateTask
         _repository = repository;
     }
 
-    public async Task<ITask> Execute(ITask task)
+    public async Task<ITask> Execute(ITask task, int userId)
     {
         try
         {
-            var result = await _repository.Update(task);
+            var result = await _repository.Update(task, userId);
             return result;
         }
         catch (Exception e)

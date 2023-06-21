@@ -12,11 +12,11 @@ public class DeleteProject : IDeleteProject
         _repository = repository;
     }
 
-    public async Task<bool> Execute(int id)
+    public async Task<bool> Execute(int id, int userId)
     {
         try
         {
-            var result = await _repository.Delete(id);
+            var result = await _repository.Delete(id, userId);
             return result;
         }
         catch (Exception e)

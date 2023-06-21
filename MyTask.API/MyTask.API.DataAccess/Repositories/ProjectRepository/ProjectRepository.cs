@@ -12,7 +12,7 @@ public class ProjectRepository : IProjectRepository
         _context = context;
     }
     
-    public async Task<bool> Create(IProject project)
+    public async Task<bool> Create(IProject project, int userId)
     {
         try
         {
@@ -26,11 +26,11 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int userId)
     {
         try
         {
-            var project = await _context.Projects.SingleAsync(p => p.Id == id);
+            var project = await _context.Projects.SingleAsync(p => p.Id == id && p.UserId == userId);
             _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
             return true;
@@ -41,11 +41,11 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<List<IProject>> Get()
+    public async Task<List<IProject>> Get(int userId)
     {
         try
         {
-            var projects = await _context.Projects.ToListAsync<IProject>();
+            var projects = await _context.Projects.Where(p => p.UserId == userId).ToListAsync<IProject>();
             return projects;
         }
         catch (Exception ex)
@@ -54,11 +54,11 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<IProject> Get(int id)
+    public async Task<IProject> Get(int id, int userId)
     {
         try
         {
-            var project = await _context.Projects.SingleAsync(p => p.Id == id);
+            var project = await _context.Projects.SingleAsync(p => p.Id == id && p.UserId == userId);
             return project;
         }
         catch (Exception ex)

@@ -13,12 +13,13 @@ public class CreateProject : ICreateProject
         _repository = repository;
     }
 
-    public async Task<IProject> Execute(IProject project)
+    public async Task<IProject> Execute(IProject project, int userId)
     {
         try
         {
-            await _repository.Create(project);
-            var createdProject = await _repository.Get(project.Id);
+            project.UserId = userId;
+            await _repository.Create(project, userId);
+            var createdProject = await _repository.Get(project.Id, userId);
 
             return createdProject;
         }

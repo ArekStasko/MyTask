@@ -17,43 +17,43 @@ public class TaskService : ITaskService
         _mapper = mapper;
     }
 
-    public async Task<TaskDTO> Create(TaskDTO taskDTO)
+    public async Task<TaskDTO> Create(TaskDTO taskDTO, int userId)
     {
         ITask task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetCreateTask();
-        var result = await processor.Execute(task);
+        var result = await processor.Execute(task, userId);
         taskDTO = _mapper.Map<TaskDTO>(result);
         return taskDTO;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int userId)
     {
         var processor = _processorFactory.GetDeleteTask();
-        var result = await processor.Execute(id);
+        var result = await processor.Execute(id, userId);
         return result;
     }
 
-    public async Task<TaskDTO> Update(TaskDTO taskDTO)
+    public async Task<TaskDTO> Update(TaskDTO taskDTO, int userId)
     {
         var task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetUpdateTask();
-        var result = await processor.Execute(task);
+        var result = await processor.Execute(task, userId);
         taskDTO = _mapper.Map<TaskDTO>(result);
         return taskDTO;
     }
 
-    public async Task<List<TaskDTO>> Get(int projectId)
+    public async Task<List<TaskDTO>> Get(int projectId, int userId)
     {
         var processor = _processorFactory.GetGetTasks();
-        var result = await processor.Execute(projectId);
+        var result = await processor.Execute(projectId, userId);
         var taskDTOs = _mapper.Map<List<TaskDTO>>(result);
         return taskDTOs;
     }
 
-    public async Task<TaskDTO> GetSingle(int id)
+    public async Task<TaskDTO> GetSingle(int id, int userId)
     {
         var processor = _processorFactory.GetGetSingleTask();
-        var result = await processor.Execute(id);
+        var result = await processor.Execute(id, userId);
         var taskDTO = _mapper.Map<TaskDTO>(result);
         return taskDTO;
     }

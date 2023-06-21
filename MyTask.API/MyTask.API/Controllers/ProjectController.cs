@@ -6,10 +6,9 @@ using MyTask.API.Services.Services.ProjectServices;
 namespace MyTask.API.Controllers;
 [Route("api/projects/[action]")]
 [ApiController]
-public class ProjectController : ControllerBase
+public class ProjectController : BaseController
 {
     private readonly IProjectService _projectService;
-    
     public ProjectController(IProjectService projectService)
     {
         _projectService = projectService;

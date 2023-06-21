@@ -5,8 +5,8 @@ namespace MyTask.API.Services.Services.ProjectServices;
 
 public interface IProjectService
 {
-    Task<ProjectDTO> Create(ProjectDTO project);
-    Task<bool> Delete(int id);
-    Task<List<ProjectDTO>> Get();
-    Task<ProjectDTO> GetSingle(int id);
+    Task<ProjectDTO> Create(ProjectDTO project, int userId);
+    Task<bool> Delete(int id, int userId);
+    Task<List<ProjectDTO>> Get(int userId);
+    Task<ProjectDTO> GetSingle(int id, int userId);
 }

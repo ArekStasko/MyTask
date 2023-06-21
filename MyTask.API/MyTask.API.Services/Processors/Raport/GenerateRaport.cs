@@ -17,13 +17,13 @@ public class GenerateRaport : IGenerateRaport
         _raportRepository = repository;
     }
 
-    public async Task<IRaport> Execute(int projectId)
+    public async Task<IRaport> Execute(int projectId, int userId)
     {
         try
         {
-            var openTasksOperation = _taskRepository.Get(projectId);
-            var inProgressTasksOperation = _taskRepository.Get(projectId);
-            var doneTasksOperation = _taskRepository.Get(projectId);
+            var openTasksOperation = _taskRepository.Get(projectId, userId);
+            var inProgressTasksOperation = _taskRepository.Get(projectId, userId);
+            var doneTasksOperation = _taskRepository.Get(projectId, userId);
             
             await Task.WhenAll(new List<Task>() { openTasksOperation, inProgressTasksOperation, doneTasksOperation });
 
@@ -37,9 +37,9 @@ public class GenerateRaport : IGenerateRaport
                 InProgressTasks = inProgressTasks.Count,
                 DoneTasks = doneTasks.Count
             };
-                
-                await _raportRepository.Generate(raport);
-                var generatedRaport = await _raportRepository.Get(raport.Id);
+                raport.UserId = userId;
+                await _raportRepository.Generate(raport, userId);
+                var generatedRaport = await _raportRepository.Get(raport.Id, userId);
                 return generatedRaport;
         }
         catch (Exception e)

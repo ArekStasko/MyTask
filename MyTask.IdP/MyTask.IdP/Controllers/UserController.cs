@@ -5,18 +5,15 @@ using MyTask.IdP.Data.Models;
 using MyTask.IdP.Services.UserService;
 
 namespace MyTask.IdP.Controllers;
-
-public class UserController
-{
     [Route("idp/users/[action]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public AuthController(IUserService userService) => _userService = userService;
+        public UserController(IUserService userService) => _userService = userService;
 
         [AllowAnonymous]
-        [HttpPost(Name = "RegisterUser")]
+        [HttpPost(Name = "Register")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
         public ActionResult<string> Register(UserDTO userDto)
@@ -26,7 +23,7 @@ public class UserController
         }
 
         [AllowAnonymous]
-        [HttpPost(Name = "RegisterUser")]
+        [HttpPost(Name = "Login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
         public ActionResult<string> Login(UserDTO userDto)
@@ -35,4 +32,3 @@ public class UserController
             return Ok(token);
         }
     }
-}

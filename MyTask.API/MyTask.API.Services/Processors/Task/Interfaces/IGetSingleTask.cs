@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.TaskProcessors.Interfaces;
 
 public interface IGetSingleTask
 {
-    Task<ITask> Execute(int id);
+    Task<ITask> Execute(int id, int userId);
 }

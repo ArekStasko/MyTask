@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Azure.Core;
 using MyTask.IdP.Data;
 using MyTask.IdP.Data.Models;
 
@@ -14,23 +16,26 @@ public class TokenService : ITokenService
         try
         {
             //This is only for test purposes
-            var securityKey = new SymmetricSecurityKey("NoHiddenKey"u8.ToArray());
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b"u8.ToArray();
 
-            var claims = new[]
+            var claims = new List<Claim>
             {
-                new Claim("Username", user.UserName),
+                new("userid", user.Id.ToString())
             };
 
-            var token = new JwtSecurityToken(
-                null, 
-                null, 
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
-                signingCredentials: credentials
-            );
+            
+            
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            };
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(token);
+            return jwt;
         } 
         catch (Exception ex)
         {

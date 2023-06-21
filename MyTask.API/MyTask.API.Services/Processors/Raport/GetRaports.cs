@@ -13,11 +13,11 @@ public class GetRaports : IGetRaports
         _repository = repository;
     }
 
-    public async Task<List<IRaport>> Execute()
+    public async Task<List<IRaport>> Execute(int userId)
     {
         try
         {
-            var raports = await _repository.Get();
+            var raports = await _repository.Get(userId);
             return raports;
         }
         catch (Exception e)

@@ -12,7 +12,7 @@ public class RaportRepository : IRaportRepository
         _context = context;
     }
     
-    public async Task<bool> Generate(IRaport raport)
+    public async Task<bool> Generate(IRaport raport, int userId)
     {
         try
         {
@@ -26,11 +26,11 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int userId)
     {
         try
         {
-            var raport = await _context.Raports.SingleAsync(p => p.Id == id);
+            var raport = await _context.Raports.SingleAsync(r => r.Id == id && r.UserId == userId);
             _context.Raports.Remove(raport);
             await _context.SaveChangesAsync();
             return true;
@@ -41,11 +41,11 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<List<IRaport>> Get()
+    public async Task<List<IRaport>> Get(int userId)
     {
         try
         {
-            var raports = await _context.Raports.ToListAsync<IRaport>();
+            var raports = await _context.Raports.Where(r => r.UserId == userId).ToListAsync<IRaport>();
             return raports;
         }
         catch (Exception ex)
@@ -54,11 +54,11 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<IRaport> Get(int id)
+    public async Task<IRaport> Get(int id, int userId)
     {
         try
         {
-            var raport = await _context.Raports.SingleAsync(r => r.Id == id);
+            var raport = await _context.Raports.SingleAsync(r => r.Id == id && r.UserId == userId);
             return raport;
         }
         catch (Exception ex)

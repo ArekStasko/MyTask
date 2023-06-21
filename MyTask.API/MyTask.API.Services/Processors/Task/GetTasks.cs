@@ -13,11 +13,11 @@ public class GetTask : IGetTasks
         _repository = repository;
     }
 
-    public async Task<List<ITask>> Execute(int projectId)
+    public async Task<List<ITask>> Execute(int projectId, int userId)
     {
         try
         {
-            var tasks = await _repository.Get(projectId);
+            var tasks = await _repository.Get(projectId, userId);
             return tasks;
         }
         catch (Exception e)

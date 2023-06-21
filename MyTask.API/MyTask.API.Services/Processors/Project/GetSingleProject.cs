@@ -13,11 +13,11 @@ public class GetSingleProject : IGetSingleProject
         _repository = repository;
     }
 
-    public async Task<IProject> Execute(int id)
+    public async Task<IProject> Execute(int id, int userId)
     {
         try
         {
-            var project = await _repository.Get(id);
+            var project = await _repository.Get(id, userId);
             return project;
         }
         catch (Exception e)

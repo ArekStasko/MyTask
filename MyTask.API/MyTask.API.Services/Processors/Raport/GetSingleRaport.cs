@@ -13,11 +13,11 @@ public class GetSingleRaport : IGetSingleRaport
         _repository = repository;
     }
 
-    public async Task<IRaport> Execute(int id)
+    public async Task<IRaport> Execute(int id, int userId)
     {
         try
         {
-            var raport = await _repository.Get(id);
+            var raport = await _repository.Get(id, userId);
             return raport;
         }
         catch (Exception e)

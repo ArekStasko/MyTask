@@ -12,7 +12,7 @@ public class TaskRepository : ITaskRepository
         _context = context;
     }
     
-    public async Task<bool> Create(ITask task)
+    public async Task<bool> Create(ITask task, int userId)
     {
         try
         {
@@ -26,11 +26,11 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int userId)
     {
         try
         {
-            var task = await _context.Tasks.SingleAsync(t => t.Id == id);
+            var task = await _context.Tasks.SingleAsync(t => t.Id == id && t.UserId == userId);
             _context.Tasks.Remove(task);
             await _context.SaveChangesAsync();
             return true;
@@ -41,11 +41,11 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<ITask> Update(ITask task)
+    public async Task<ITask> Update(ITask task, int userId)
     {
         try
         {
-            var taskToUpdate = await _context.Tasks.SingleAsync(t => t.Id == task.Id);
+            var taskToUpdate = await _context.Tasks.SingleAsync(t => t.Id == task.Id && t.UserId == userId);
 
             taskToUpdate.Name = task.Name;
             taskToUpdate.Description = task.Name;
@@ -60,11 +60,11 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<List<ITask>> Get(int projectId)
+    public async Task<List<ITask>> Get(int projectId, int userId)
     {
         try
         {
-            var tasks = _context.Tasks.Where(t => t.ProjectId == projectId);
+            var tasks = _context.Tasks.Where(t => t.ProjectId == projectId && t.UserId == userId);
             return await tasks.ToListAsync<ITask>();
         }
         catch (Exception ex)
@@ -73,11 +73,11 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<ITask> GetSingle(int id)
+    public async Task<ITask> GetSingle(int id, int userId)
     {
         try
         {
-            var task = await _context.Tasks.SingleAsync(t => t.Id == id);
+            var task = await _context.Tasks.SingleAsync(t => t.Id == id && t.UserId == userId);
             return task;
         }
         catch (Exception ex)

@@ -6,5 +6,6 @@ public interface IProject
 {
     [Key] 
     int Id { get; set; }
+    int UserId { get; set; }
     string Name { get; set; }
 }

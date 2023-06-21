@@ -5,8 +5,8 @@ namespace MyTask.API.Services.Services.RaportControllers;
 
 public interface IRaportService
 {
-    Task<RaportDTO> Generate(int projectId);
-    Task<bool> Delete(int id);
-    Task<List<RaportDTO>> Get();
-    Task<RaportDTO> GetSingle(int id);
+    Task<RaportDTO> Generate(int projectId, int userId);
+    Task<bool> Delete(int id, int userId);
+    Task<List<RaportDTO>> Get(int userId);
+    Task<RaportDTO> GetSingle(int id, int userId);
 }

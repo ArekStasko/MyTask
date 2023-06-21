@@ -19,35 +19,35 @@ public class ProjectService : IProjectService
     }
 
 
-    public async Task<ProjectDTO> Create(ProjectDTO projectDTO)
+    public async Task<ProjectDTO> Create(ProjectDTO projectDTO, int userId)
     {
         IProject project = _mapper.Map<Project>(projectDTO);
         var processor = _processorFactory.GetCreateProject();
-        var result = await processor.Execute(project);
+        var result = await processor.Execute(project, userId);
 
         projectDTO = _mapper.Map<ProjectDTO>(result);
         return projectDTO;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int userId)
     {
         var processor = _processorFactory.GetDeleteProject();
-        var result = await processor.Execute(id);
+        var result = await processor.Execute(id, userId);
         return result;
     }
 
-    public async Task<List<ProjectDTO>> Get()
+    public async Task<List<ProjectDTO>> Get(int userId)
     {
         var processor = _processorFactory.GetGetProjects();
-        var result = await processor.Execute();
+        var result = await processor.Execute(userId);
         var projectsDto = _mapper.Map<List<ProjectDTO>>(result);
         return projectsDto;
     }
 
-    public async Task<ProjectDTO> GetSingle(int id)
+    public async Task<ProjectDTO> GetSingle(int id, int userId)
     {
         var processor = _processorFactory.GetGetSingleProject();
-        var result = await processor.Execute(id);
+        var result = await processor.Execute(id, userId);
         var projectsDto = _mapper.Map<ProjectDTO>(result);
         return projectsDto;
     }

@@ -4,8 +4,8 @@ namespace MyTask.API.DataAccess.Repositories.RaportRepository;
 
 public interface IRaportRepository
 {
-    Task<bool> Generate(IRaport raport);
-    Task<bool> Delete(int id);
-    Task<List<IRaport>> Get();
-    Task<IRaport> Get(int id);
+    Task<bool> Generate(IRaport raport, int userId);
+    Task<bool> Delete(int id, int userId);
+    Task<List<IRaport>> Get(int userId);
+    Task<IRaport> Get(int id, int userId);
 }
