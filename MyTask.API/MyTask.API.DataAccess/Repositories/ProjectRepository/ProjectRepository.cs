@@ -45,7 +45,10 @@ public class ProjectRepository : IProjectRepository
     {
         try
         {
+            Console.WriteLine("USER ID");
+            Console.WriteLine(userId);
             var projects = await _context.Projects.Where(p => p.UserId == userId).ToListAsync<IProject>();
+            Console.WriteLine(projects.First().UserId);
             return projects;
         }
         catch (Exception ex)
