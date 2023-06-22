@@ -13,7 +13,7 @@ public class GetProjects : IGetProjects
         _repository = repository;
     }
 
-    public async Task<List<IProject>> Execute(int userId)
+    public async Task<List<IProject>> Execute(string userId)
     {
         try
         {

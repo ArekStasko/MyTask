@@ -13,7 +13,7 @@ public class GetSingleTask : IGetSingleTask
         _repository = repository;
     }
 
-    public async Task<ITask> Execute(int id, int userId)
+    public async Task<ITask> Execute(int id, string userId)
     {
         try
         {

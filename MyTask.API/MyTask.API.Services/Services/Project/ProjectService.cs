@@ -19,7 +19,7 @@ public class ProjectService : IProjectService
     }
 
 
-    public async Task<ProjectDTO> Create(ProjectDTO projectDTO, int userId)
+    public async Task<ProjectDTO> Create(ProjectDTO projectDTO, string userId)
     {
         IProject project = _mapper.Map<Project>(projectDTO);
         var processor = _processorFactory.GetCreateProject();
@@ -29,14 +29,14 @@ public class ProjectService : IProjectService
         return projectDTO;
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         var processor = _processorFactory.GetDeleteProject();
         var result = await processor.Execute(id, userId);
         return result;
     }
 
-    public async Task<List<ProjectDTO>> Get(int userId)
+    public async Task<List<ProjectDTO>> Get(string userId)
     {
         var processor = _processorFactory.GetGetProjects();
         var result = await processor.Execute(userId);
@@ -44,7 +44,7 @@ public class ProjectService : IProjectService
         return projectsDto;
     }
 
-    public async Task<ProjectDTO> GetSingle(int id, int userId)
+    public async Task<ProjectDTO> GetSingle(int id, string userId)
     {
         var processor = _processorFactory.GetGetSingleProject();
         var result = await processor.Execute(id, userId);

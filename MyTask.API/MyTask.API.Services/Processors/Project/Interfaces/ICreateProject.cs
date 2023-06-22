@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.ProjectProcessors.Interfaces;
 
 public interface ICreateProject
 {
-    Task<IProject> Execute(IProject project, int userId);
+    Task<IProject> Execute(IProject project, string userId);
 }

@@ -17,7 +17,7 @@ public class RaportService : IRaportService
         _mapper = mapper;
     }
 
-    public async Task<RaportDTO> Generate(int projectId, int userId)
+    public async Task<RaportDTO> Generate(int projectId, string userId)
     {
         var processor = _processorFactory.GetGenerateRaport();
         var result = await processor.Execute(projectId, userId);
@@ -25,14 +25,14 @@ public class RaportService : IRaportService
         return raportDTO;
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         var processor = _processorFactory.GetDeleteRaport();
         var result = await processor.Execute(id, userId);
         return result;
     }
 
-    public async Task<List<RaportDTO>> Get(int userId)
+    public async Task<List<RaportDTO>> Get(string userId)
     {
         var processor = _processorFactory.GetGetRaports();
         var result = await processor.Execute(userId);
@@ -40,7 +40,7 @@ public class RaportService : IRaportService
         return raportDTO;
     }
 
-    public async Task<RaportDTO> GetSingle(int id, int userId)
+    public async Task<RaportDTO> GetSingle(int id, string userId)
     {
         var processor = _processorFactory.GetGetSingleRaport();
         var result = await processor.Execute(id, userId);

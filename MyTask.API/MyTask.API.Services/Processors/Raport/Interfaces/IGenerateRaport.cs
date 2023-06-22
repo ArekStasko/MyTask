@@ -5,5 +5,5 @@ namespace MyTask.API.Services.Processors.RaportProcessors.Interfaces;
 
 public interface IGenerateRaport
 {
-    Task<IRaport> Execute(int projectId, int userId);
+    Task<IRaport> Execute(int projectId, string userId);
 }

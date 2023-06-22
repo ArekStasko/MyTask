@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.RaportProcessors.Interfaces;
 
 public interface IGetSingleRaport
 {
-    Task<IRaport> Execute(int id, int userId);
+    Task<IRaport> Execute(int id, string userId);
 }

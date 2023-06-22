@@ -12,7 +12,7 @@ public class TaskRepository : ITaskRepository
         _context = context;
     }
     
-    public async Task<bool> Create(ITask task, int userId)
+    public async Task<bool> Create(ITask task, string userId)
     {
         try
         {
@@ -26,7 +26,7 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         try
         {
@@ -41,7 +41,7 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<ITask> Update(ITask task, int userId)
+    public async Task<ITask> Update(ITask task, string userId)
     {
         try
         {
@@ -60,7 +60,7 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<List<ITask>> Get(int projectId, int userId)
+    public async Task<List<ITask>> Get(int projectId, string userId)
     {
         try
         {
@@ -73,7 +73,7 @@ public class TaskRepository : ITaskRepository
         }
     }
 
-    public async Task<ITask> GetSingle(int id, int userId)
+    public async Task<ITask> GetSingle(int id, string userId)
     {
         try
         {

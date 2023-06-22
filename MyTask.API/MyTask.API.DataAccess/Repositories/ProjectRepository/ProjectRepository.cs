@@ -12,7 +12,7 @@ public class ProjectRepository : IProjectRepository
         _context = context;
     }
     
-    public async Task<bool> Create(IProject project, int userId)
+    public async Task<bool> Create(IProject project, string userId)
     {
         try
         {
@@ -26,7 +26,7 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         try
         {
@@ -41,7 +41,7 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<List<IProject>> Get(int userId)
+    public async Task<List<IProject>> Get(string userId)
     {
         try
         {
@@ -54,7 +54,7 @@ public class ProjectRepository : IProjectRepository
         }
     }
 
-    public async Task<IProject> Get(int id, int userId)
+    public async Task<IProject> Get(int id, string userId)
     {
         try
         {

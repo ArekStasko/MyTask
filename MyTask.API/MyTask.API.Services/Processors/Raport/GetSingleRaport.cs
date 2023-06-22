@@ -13,7 +13,7 @@ public class GetSingleRaport : IGetSingleRaport
         _repository = repository;
     }
 
-    public async Task<IRaport> Execute(int id, int userId)
+    public async Task<IRaport> Execute(int id, string userId)
     {
         try
         {

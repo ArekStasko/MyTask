@@ -12,7 +12,7 @@ public class DeleteRaport : IDeleteRaport
         _repository = repository;
     }
 
-    public async Task<bool> Execute(int id, int userId)
+    public async Task<bool> Execute(int id, string userId)
     {
         try
         {

@@ -4,9 +4,9 @@ namespace MyTask.API.DataAccess.Repositories.TaskRepository;
 
 public interface ITaskRepository
 {
-    Task<bool> Create(ITask task, int userId);
-    Task<bool> Delete(int id, int userId);
-    Task<ITask> Update(ITask task, int userId);
-    Task<List<ITask>> Get(int projectId, int userId);
-    Task<ITask> GetSingle(int id, int userId);
+    Task<bool> Create(ITask task, string userId);
+    Task<bool> Delete(int id, string userId);
+    Task<ITask> Update(ITask task, string userId);
+    Task<List<ITask>> Get(int projectId, string userId);
+    Task<ITask> GetSingle(int id, string userId);
 }

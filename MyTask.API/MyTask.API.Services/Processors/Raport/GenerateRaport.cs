@@ -17,7 +17,7 @@ public class GenerateRaport : IGenerateRaport
         _raportRepository = repository;
     }
 
-    public async Task<IRaport> Execute(int projectId, int userId)
+    public async Task<IRaport> Execute(int projectId, string userId)
     {
         try
         {

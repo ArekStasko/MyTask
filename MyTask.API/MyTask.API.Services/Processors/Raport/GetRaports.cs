@@ -13,7 +13,7 @@ public class GetRaports : IGetRaports
         _repository = repository;
     }
 
-    public async Task<List<IRaport>> Execute(int userId)
+    public async Task<List<IRaport>> Execute(string userId)
     {
         try
         {

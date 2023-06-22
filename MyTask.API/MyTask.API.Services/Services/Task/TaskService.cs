@@ -17,7 +17,7 @@ public class TaskService : ITaskService
         _mapper = mapper;
     }
 
-    public async Task<TaskDTO> Create(TaskDTO taskDTO, int userId)
+    public async Task<TaskDTO> Create(TaskDTO taskDTO, string userId)
     {
         ITask task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetCreateTask();
@@ -26,14 +26,14 @@ public class TaskService : ITaskService
         return taskDTO;
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         var processor = _processorFactory.GetDeleteTask();
         var result = await processor.Execute(id, userId);
         return result;
     }
 
-    public async Task<TaskDTO> Update(TaskDTO taskDTO, int userId)
+    public async Task<TaskDTO> Update(TaskDTO taskDTO, string userId)
     {
         var task = _mapper.Map<_Task>(taskDTO);
         var processor = _processorFactory.GetUpdateTask();
@@ -42,7 +42,7 @@ public class TaskService : ITaskService
         return taskDTO;
     }
 
-    public async Task<List<TaskDTO>> Get(int projectId, int userId)
+    public async Task<List<TaskDTO>> Get(int projectId, string userId)
     {
         var processor = _processorFactory.GetGetTasks();
         var result = await processor.Execute(projectId, userId);
@@ -50,7 +50,7 @@ public class TaskService : ITaskService
         return taskDTOs;
     }
 
-    public async Task<TaskDTO> GetSingle(int id, int userId)
+    public async Task<TaskDTO> GetSingle(int id, string userId)
     {
         var processor = _processorFactory.GetGetSingleTask();
         var result = await processor.Execute(id, userId);

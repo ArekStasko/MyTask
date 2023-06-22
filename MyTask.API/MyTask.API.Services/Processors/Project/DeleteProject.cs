@@ -12,7 +12,7 @@ public class DeleteProject : IDeleteProject
         _repository = repository;
     }
 
-    public async Task<bool> Execute(int id, int userId)
+    public async Task<bool> Execute(int id, string userId)
     {
         try
         {

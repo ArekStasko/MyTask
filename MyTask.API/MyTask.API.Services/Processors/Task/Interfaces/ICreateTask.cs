@@ -4,5 +4,5 @@ namespace MyTask.API.Services.Processors.TaskProcessors.Interfaces;
 
 public interface ICreateTask
 {
-    Task<ITask> Execute(ITask task, int userId);
+    Task<ITask> Execute(ITask task, string userId);
 }

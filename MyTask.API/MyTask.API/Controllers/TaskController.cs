@@ -7,7 +7,7 @@ namespace MyTask.API.Controllers;
 
 [Route("api/tasks/[action]")]
 [ApiController]
-public class TaskController : ControllerBase
+public class TaskController : BaseController
 {
     private readonly ITaskService _taskService;
 
@@ -22,7 +22,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<bool>> Create(TaskDTO task)
     {
-        var result = await _taskService.Create(task);
+        var result = await _taskService.Create(task, UserId);
         return Ok(result);
     }
     
@@ -32,7 +32,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<bool>> Delete([FromQuery] int id)
     {
-        var result = await _taskService.Delete(id);
+        var result = await _taskService.Delete(id, UserId);
         return Ok(result);
     }
     
@@ -42,7 +42,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<List<TaskDTO>>> Get([FromQuery] int projectId)
     {
-        var result = await _taskService.Get(projectId);
+        var result = await _taskService.Get(projectId, UserId);
         return Ok(result);
     }
 
@@ -52,7 +52,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<TaskDTO>> Update(TaskDTO task)
     {
-        var result = await _taskService.Update(task);
+        var result = await _taskService.Update(task, UserId);
         return Ok(result);
     }
 
@@ -62,7 +62,7 @@ public class TaskController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<TaskDTO>> GetSingle([FromQuery] int id)
     {
-        var result = await _taskService.GetSingle(id);
+        var result = await _taskService.GetSingle(id, UserId);
         return Ok(result);
     }
 }

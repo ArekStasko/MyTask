@@ -13,7 +13,7 @@ public class UpdateTask : IUpdateTask
         _repository = repository;
     }
 
-    public async Task<ITask> Execute(ITask task, int userId)
+    public async Task<ITask> Execute(ITask task, string userId)
     {
         try
         {

@@ -12,7 +12,7 @@ public class RaportRepository : IRaportRepository
         _context = context;
     }
     
-    public async Task<bool> Generate(IRaport raport, int userId)
+    public async Task<bool> Generate(IRaport raport, string userId)
     {
         try
         {
@@ -26,7 +26,7 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<bool> Delete(int id, int userId)
+    public async Task<bool> Delete(int id, string userId)
     {
         try
         {
@@ -41,7 +41,7 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<List<IRaport>> Get(int userId)
+    public async Task<List<IRaport>> Get(string userId)
     {
         try
         {
@@ -54,7 +54,7 @@ public class RaportRepository : IRaportRepository
         }
     }
 
-    public async Task<IRaport> Get(int id, int userId)
+    public async Task<IRaport> Get(int id, string userId)
     {
         try
         {

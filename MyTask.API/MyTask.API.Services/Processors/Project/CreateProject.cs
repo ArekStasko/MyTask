@@ -13,7 +13,7 @@ public class CreateProject : ICreateProject
         _repository = repository;
     }
 
-    public async Task<IProject> Execute(IProject project, int userId)
+    public async Task<IProject> Execute(IProject project, string userId)
     {
         try
         {

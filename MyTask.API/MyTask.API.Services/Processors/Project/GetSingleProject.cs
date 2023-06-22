@@ -13,7 +13,7 @@ public class GetSingleProject : IGetSingleProject
         _repository = repository;
     }
 
-    public async Task<IProject> Execute(int id, int userId)
+    public async Task<IProject> Execute(int id, string userId)
     {
         try
         {
