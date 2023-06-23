@@ -31,11 +31,12 @@ public class UserService : IUserService
                 PasswordSalt = hash.Item2
             };
             _context.Users.Add(user);
-
-            string token = _tokenService.GenerateToke(user);
-            user.Token = token;
-                
             _context.SaveChanges();
+            var createdUser = _context.Users.First(u => u.UserName == userDto.UserName);
+            Console.WriteLine("CREATED USER:");
+            Console.WriteLine(createdUser);
+            string token = _tokenService.GenerateToke(createdUser);
+                
             return token;
         }
         catch (Exception ex)
@@ -54,9 +55,6 @@ public class UserService : IUserService
                 if (!VerifyPasswordHash(userDto.Password, user)) throw new Exception("Wrong Password or Username");    
 
                 string token = _tokenService.GenerateToke(user);
-
-                user.Token = token;
-                _context.SaveChanges();
 
                 return token;
             }
