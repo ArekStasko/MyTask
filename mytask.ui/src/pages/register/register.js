@@ -5,8 +5,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {FormProvider, useForm} from "react-hook-form";
 import validations from "../../common/validations/validations";
-const Register = () => {
+import {useRegisterMutation} from "../../common/slices/register/registerSlice";
+import {SaveToken} from "../../common/services/cookieService";
 
+const Register = () => {
     const methods = useForm({
         mode: 'onChange',
         resolver: yupResolver(validations.registerSchema),
@@ -17,6 +19,8 @@ const Register = () => {
         setValue,
         formState: {errors}
     } = methods;
+
+    const [register, {isLoading: registerLoading}] = useRegisterMutation();
 
     const isPasswordCorrect = () => {
         const username = methods.getValues('username');
@@ -30,19 +34,23 @@ const Register = () => {
         return true;
     }
 
-    const registerUser = () => {
+    const registerUser = async () => {
         const username = methods.getValues('username');
         const password = methods.getValues('password');
 
-        console.log(username);
-        console.log(password);
+        try {
+            const result = await register({ username, password });
+            SaveToken(result.error.data);
+        } catch (error) {
+            //TODO: write error handling
+            console.error(error);
+        }
     }
 
     const handleChange = (e) => {
         const {
             target: {value, id}
         } = e;
-        console.log(`${id} => ${value}`);
         setValue(id, value);
         trigger(id);
     };

@@ -5,6 +5,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import {FormProvider, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import validations from "../../common/validations/validations";
+import {SaveToken} from "../../common/services/cookieService";
+import {useLoginMutation} from "../../common/slices/login/loginSlice";
 
 const Login = () => {
 
@@ -13,18 +15,25 @@ const Login = () => {
         resolver: yupResolver(validations.loginSchema),
     })
 
+    const [login, {isLoading: loginLoading}] = useLoginMutation();
+
     const {
         trigger,
         setValue,
         formState: {errors}
     } = methods;
 
-    const loginUser = () => {
+    const loginUser = async () => {
         const username = methods.getValues('username');
         const password = methods.getValues('password');
 
-        console.log(username);
-        console.log(password);
+        try {
+            const result = await login({ username, password });
+            SaveToken(result.error.data);
+        } catch (error) {
+            //TODO: write error handling
+            console.error(error);
+        }
     }
 
     const areFieldsCorrect = () => {
@@ -47,11 +56,11 @@ const Login = () => {
 
     return(
         <Container sx={{height: '100%', width: '100%',  display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Box sx={{height: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Box sx={{height: '60%', width: '25%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Typography variant="h3" gutterBottom>
                     Log In
                 </Typography>
-                <Box sx={{display: 'flex', flexDirection:'column', height: '30%', justifyContent: 'space-around'}}>
+                <Box sx={{display: 'flex', flexDirection:'column', height: '35%', width: '100%', justifyContent: 'space-around'}}>
                     <FormProvider {...methods}>
                     <TextField
                         color="primary"
