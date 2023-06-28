@@ -1,6 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
 import emptyApi from "../app/emptyApi";
-import {sessionStoreMiddleware} from "../app/SessionService";
 
 
 const store = configureStore({

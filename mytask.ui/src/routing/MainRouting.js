@@ -4,6 +4,8 @@ import Homepage from "../pages/homepage/homepage";
 import Login from "../pages/login/login";
 import Register from "../pages/register/register";
 import AuthNavbar from "../common/components/AuthNavbar";
+import Dashboard from "../pages/dashboard/dashboard";
+import SessionService from "../common/services/sessionService";
 
 const MainRouting = () => (
     <Routes>
@@ -19,6 +21,10 @@ const MainRouting = () => (
             path={RoutingConstants.register}
             element={<AuthNavbar link={"/login"} sectionName={"Login"} ><Register/></AuthNavbar>}
         />
+            <Route
+                path={RoutingConstants.dashboard}
+                element={<SessionService><Dashboard/></SessionService>}
+            />
     </Routes>
 )
 

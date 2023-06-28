@@ -4,8 +4,21 @@ using Microsoft.IdentityModel.Tokens;
 using MyTask.API.DataAccess;
 using MyTask.API.Services;
 
+const string AllowSpecifiOrigin = "AllowSpecifiOrigin";
+
 var builder = WebApplication.CreateBuilder(args);
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Add services to the container.
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecifiOrigin, policy => policy.WithOrigins("http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
+
 
 // Add services to the container.
 
@@ -56,6 +69,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AllowSpecifiOrigin);
 
 //It is important to keep authentication before authorization
 app.UseAuthentication();

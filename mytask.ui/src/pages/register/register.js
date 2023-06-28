@@ -1,4 +1,4 @@
-import {Box, Button, Container, Link, TextField, Typography} from "@mui/material";
+import {Box, Button, Container, Link, TextField, Typography, CircularProgress} from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyIcon from '@mui/icons-material/Key';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,8 +7,13 @@ import {FormProvider, useForm} from "react-hook-form";
 import validations from "../../common/validations/validations";
 import {useRegisterMutation} from "../../common/slices/register/registerSlice";
 import {SaveToken} from "../../common/services/cookieService";
+import {useNavigate} from "react-router-dom";
+import RoutingPaths from "../../routing/RoutingConstants";
 
 const Register = () => {
+    const [register, {isLoading: registerLoading}] = useRegisterMutation();
+    const navigate = useNavigate();
+
     const methods = useForm({
         mode: 'onChange',
         resolver: yupResolver(validations.registerSchema),
@@ -19,8 +24,6 @@ const Register = () => {
         setValue,
         formState: {errors}
     } = methods;
-
-    const [register, {isLoading: registerLoading}] = useRegisterMutation();
 
     const isPasswordCorrect = () => {
         const username = methods.getValues('username');
@@ -41,6 +44,7 @@ const Register = () => {
         try {
             const result = await register({ username, password });
             SaveToken(result.error.data);
+            navigate(RoutingPaths.dashboard);
         } catch (error) {
             //TODO: write error handling
             console.error(error);
@@ -127,14 +131,20 @@ const Register = () => {
                     />
                     </FormProvider>
                 </Box>
-                <Button
-                    variant="contained"
-                    sx={{width: '100%', p: 1}}
-                    onClick={() => registerUser()}
-                    disabled={!isPasswordCorrect()}
-                >
-                    Register
-                </Button>
+                {
+                    registerLoading ? (
+                        <CircularProgress />
+                    ) : (
+                        <Button
+                            variant="contained"
+                            sx={{width: '100%', p: 1}}
+                            onClick={() => registerUser()}
+                            disabled={!isPasswordCorrect()}
+                        >
+                            Register
+                        </Button>
+                    )
+                }
                 <Link href="/login" underline="none" sx={{mt: 0.5}} >
                     I already have an account
                 </Link>

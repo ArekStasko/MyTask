@@ -3,9 +3,20 @@ using MyTask.IdP.Data;
 using MyTask.IdP.Services.TokenService;
 using MyTask.IdP.Services.UserService;
 
+const string AllowSpecifiOrigin = "AllowSpecifiOrigin";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecifiOrigin, policy => policy.WithOrigins("http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
+
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
@@ -28,6 +39,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AllowSpecifiOrigin);
 
 app.UseAuthorization();
 

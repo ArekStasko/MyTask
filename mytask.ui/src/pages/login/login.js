@@ -1,4 +1,4 @@
-import {Box, Button, Container, Link, TextField, Typography} from "@mui/material";
+import {Box, Button, CircularProgress, Container, Link, TextField, Typography} from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyIcon from '@mui/icons-material/Key';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,15 +7,20 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import validations from "../../common/validations/validations";
 import {SaveToken} from "../../common/services/cookieService";
 import {useLoginMutation} from "../../common/slices/login/loginSlice";
+import {useNavigate} from "react-router-dom";
+import RoutingPaths from "../../routing/RoutingConstants";
 
 const Login = () => {
+
+    const [login, {isLoading: loginLoading}] = useLoginMutation();
+    const navigate = useNavigate();
 
     const methods = useForm({
         mode: 'onChange',
         resolver: yupResolver(validations.loginSchema),
     })
 
-    const [login, {isLoading: loginLoading}] = useLoginMutation();
+
 
     const {
         trigger,
@@ -30,6 +35,7 @@ const Login = () => {
         try {
             const result = await login({ username, password });
             SaveToken(result.error.data);
+            navigate(RoutingPaths.dashboard);
         } catch (error) {
             //TODO: write error handling
             console.error(error);
@@ -105,14 +111,20 @@ const Login = () => {
                     />
                     </FormProvider>
                 </Box>
-                <Button
-                    variant="contained"
-                    sx={{width: '100%', p: 1}}
-                    onClick={() => loginUser()}
-                    disabled={!areFieldsCorrect()}
-                >
-                    Login
-                </Button>
+                {
+                    loginLoading ? (
+                        <CircularProgress />
+                    ) : (
+                        <Button
+                            variant="contained"
+                            sx={{width: '100%', p: 1}}
+                            onClick={() => loginUser()}
+                            disabled={!areFieldsCorrect()}
+                        >
+                            Login
+                        </Button>
+                    )
+                }
                 <Link href="/register" underline="none" sx={{mt: 0.5}} >
                     I don't have an account
                 </Link>
