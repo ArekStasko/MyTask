@@ -42,6 +42,14 @@ public class TaskService : ITaskService
         return taskDTO;
     }
 
+    public async Task<List<TaskDTO>> GetAll(string userId)
+    {
+        var processor = _processorFactory.GetGetAllTasks();
+        var result = await processor.Execute(userId);
+        var taskDTOs = _mapper.Map<List<TaskDTO>>(result);
+        return taskDTOs;
+    }
+
     public async Task<List<TaskDTO>> Get(int projectId, string userId)
     {
         var processor = _processorFactory.GetGetTasks();

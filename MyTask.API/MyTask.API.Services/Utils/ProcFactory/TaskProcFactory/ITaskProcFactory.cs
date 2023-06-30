@@ -8,5 +8,6 @@ public interface ITaskProcFactory
     IDeleteTask GetDeleteTask();
     IUpdateTask GetUpdateTask();
     IGetTasks GetGetTasks();
+    IGetAllTasks GetGetAllTasks();
     IGetSingleTask GetGetSingleTask();
 }

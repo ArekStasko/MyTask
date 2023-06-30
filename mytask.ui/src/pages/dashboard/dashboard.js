@@ -1,14 +1,31 @@
-import {Box, Container, makeStyles, Tab, Tabs, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
+import {
+    Box, Button,
+    Card,
+    CardActions,
+    CardContent,
+    CircularProgress,
+    Container,
+    makeStyles,
+    Tab,
+    Tabs,
+    Typography
+} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import { alpha } from '@mui/system';
 import dashboard from '../../imgs/dashboard.png'
+import {useGetTasksQuery} from "../../common/slices/getTasks/getTasks";
+import {stateColors} from "../../common/services/taskStateService";
+import {states} from "../../common/services/taskStateService";
+import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
 
     const Dashboard = () => {
         const [tab, setTab] = useState(0);
         const [currentTime, setCurrentTime] = useState();
+        const {data, isLoading} = useGetTasksQuery();
+        const {data: projectData, isLoading: projectsLoading} = useGetProjectsQuery();
 
         useEffect(() => {
                 const currentDate = new Date();
@@ -119,10 +136,75 @@ import dashboard from '../../imgs/dashboard.png'
                 </Box>
                 <Box
                     sx={{
-                        width: '50%'
+                        width: '25%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center'
                     }}
                 >
-
+                    <Typography color="white" variant="h4" gutterBottom sx={{ mt: 2 }}>
+                        Upcoming Tasks
+                    </Typography>
+                        {
+                            isLoading ? (
+                                <CircularProgress />
+                            ) : (
+                                data.slice(0,3).map(task =>
+                                    <Card key={task.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}>
+                                        <Box sx={{ width: '100%', p: 0.5, pl: 1, bgcolor: (theme) => alpha(`${stateColors[task.state]}`, 0.7) }}>
+                                            <Typography color="text.secondary">
+                                                {states[task.state]}
+                                            </Typography>
+                                        </Box>
+                                        <CardContent>
+                                            <Typography variant="h5" component="div">
+                                                {task.name}
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                {task.description}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small">See details</Button>
+                                        </CardActions>
+                                    </Card>
+                                )
+                            )
+                        }
+                </Box>
+                <Box
+                    sx={{
+                        width: '25%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Typography color="white" variant="h4" gutterBottom sx={{ mt: 2 }}>
+                        Active Projects
+                    </Typography>
+                    {
+                        projectsLoading ? (
+                            <CircularProgress />
+                        ) : (
+                            projectData.slice(0,6).map(project =>
+                                <Card key={project.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="div">
+                                            {project.name}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">See more</Button>
+                                    </CardActions>
+                                </Card>
+                            )
+                        )
+                    }
                 </Box>
             </Container>
         )

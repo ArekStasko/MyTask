@@ -1,6 +1,6 @@
-import emptyApi from "../../../app/emptyApi";
+import idpApi from "../../../app/idpApi";
 
-export const loginUserApi = emptyApi.injectEndpoints({
+export const loginUserApi = idpApi.injectEndpoints({
     endpoints: (build) => ({
         Login: build.mutation({
             query: ({ ...rest }) => ({

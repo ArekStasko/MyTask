@@ -37,7 +37,17 @@ public class TaskController : BaseController
     }
     
     [Authorize]
-    [HttpGet(Name = "GetTask")]
+    [HttpGet(Name = "GetTasks")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskDTO>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
+    public async Task<ActionResult<List<TaskDTO>>> GetTasks()
+    {
+        var result = await _taskService.GetAll(UserId);
+        return Ok(result);
+    }
+    
+    [Authorize]
+    [HttpGet(Name = "GetTaskByProjectId")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TaskDTO>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Exception))]
     public async Task<ActionResult<List<TaskDTO>>> Get([FromQuery] int projectId)

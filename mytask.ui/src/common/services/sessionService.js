@@ -17,10 +17,10 @@ const SessionService = (props) => {
             const tokenExpiration = decodedToken.exp;
 
             if (tokenExpiration < currentTime) {
-                navigate(RoutingPaths.root)
+                navigate(RoutingPaths.login)
             }
         } else {
-            navigate(RoutingPaths.login)
+            navigate(RoutingPaths.register)
         }
     }, [])
 

@@ -4,7 +4,7 @@ import {GetToken} from "../common/services/cookieService";
 const emptyApi = createApi({
     reducerPath: 'emptyApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080/idp",
+        baseUrl: "http://localhost:8090/api/",
         prepareHeaders: (headers, { getState }) => {
             const token = GetToken();
             if (token) {

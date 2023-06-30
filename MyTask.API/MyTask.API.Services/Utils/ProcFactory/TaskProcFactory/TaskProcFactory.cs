@@ -16,5 +16,7 @@ public class TaskProcFactory : ITaskProcFactory
     public IDeleteTask GetDeleteTask() => new DeleteTask(_repository);
     public IUpdateTask GetUpdateTask() => new UpdateTask(_repository);
     public IGetTasks GetGetTasks() => new GetTask(_repository);
+    public IGetAllTasks GetGetAllTasks() => new GetAllTasks(_repository);
+
     public IGetSingleTask GetGetSingleTask() => new GetSingleTask(_repository);
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyTask.API.DataAccess.Data;
+using MyTask.API.DataAccess.Data.Enums;
 using MyTask.API.DataAccess.Data.Models.Task;
 
 namespace MyTask.API.DataAccess.Repositories.TaskRepository;
@@ -65,6 +66,19 @@ public class TaskRepository : ITaskRepository
         try
         {
             var tasks = _context.Tasks.Where(t => t.ProjectId == projectId && t.UserId == userId);
+            return await tasks.ToListAsync<ITask>();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task<List<ITask>> GetAll(string userId)
+    {
+        try
+        {
+            var tasks = _context.Tasks;
             return await tasks.ToListAsync<ITask>();
         }
         catch (Exception ex)
