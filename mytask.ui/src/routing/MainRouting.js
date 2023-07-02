@@ -6,6 +6,8 @@ import Register from "../pages/register/register";
 import AuthNavbar from "../common/components/AuthNavbar";
 import Dashboard from "../pages/dashboard/dashboard";
 import SessionService from "../common/services/sessionService";
+import Reports from "../pages/reports/reports";
+import Projects from "../pages/projects/projects";
 
 const MainRouting = () => (
     <Routes>
@@ -25,6 +27,14 @@ const MainRouting = () => (
                 path={RoutingConstants.dashboard}
                 element={<SessionService><Dashboard/></SessionService>}
             />
+        <Route
+            path={RoutingConstants.reports}
+            element={<SessionService><Reports/></SessionService>}
+        />
+        <Route
+            path={RoutingConstants.projects}
+            element={<SessionService><Projects/></SessionService>}
+        />
     </Routes>
 )
 

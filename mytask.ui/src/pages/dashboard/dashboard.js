@@ -3,12 +3,11 @@ import {
     Card,
     CardActions,
     CardContent,
-    CircularProgress,
-    Container,
-    makeStyles,
+    CircularProgress, Collapse,
+    Container, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader,
     Tab,
     Tabs,
-    Typography
+    Typography, withStyles
 } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
@@ -20,18 +19,24 @@ import {useGetTasksQuery} from "../../common/slices/getTasks/getTasks";
 import {stateColors} from "../../common/services/taskStateService";
 import {states} from "../../common/services/taskStateService";
 import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
+import RoutingConstants from "../../routing/RoutingConstants";
+import {useNavigate} from "react-router-dom";
+import {ExpandLess, ExpandMore, StarBorder} from "@mui/icons-material";
 
     const Dashboard = () => {
-        const [tab, setTab] = useState(0);
         const [currentTime, setCurrentTime] = useState();
         const {data, isLoading} = useGetTasksQuery();
         const {data: projectData, isLoading: projectsLoading} = useGetProjectsQuery();
+        const [open, setOpen] = React.useState(false);
+
+        const navigate = useNavigate();
 
         useEffect(() => {
                 const currentDate = new Date();
                 const currentHour = currentDate.getHours();
                 const currentMinute = currentDate.getMinutes();
                 setCurrentTime(`${currentHour}:${currentMinute}`);
+
         }, []);
 
         useEffect(() => {
@@ -52,7 +57,6 @@ import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
         }
 
         const getCurrentDay = () => new Date().toLocaleString('en-us', {weekday:'long'});
-
 
         return (
             <Container
@@ -78,50 +82,64 @@ import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
             >
                 <Box sx={{
                     height: "100%",
-                    width: "25%",
+                    width: "20%",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                    bgcolor: (theme) => alpha('#e3d6d5', 0.7),
-                    p: 4,
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    bgcolor: (theme) => alpha('#e3d6d5', 0.3),
+                    backdropFilter: "blur(10px)",
                 }}>
-                    <Typography color="primary" variant="h4" gutterBottom sx={{ mt: 5 }}>
-                        MyTask
-                    </Typography>
-                    <Tabs
-                        orientation="vertical"
-                        variant="scrollable"
-                        value={tab}
-                        onChange={(event, newTab) => setTab(newTab)}
-                        sx={{
-                            borderRight: 0,
-                            borderColor: 'divider',
-                            width: '100%'
-                    }}
+                    <List
+                        sx={{ width: '100%', maxWidth: 360, color: "white" }}
+                        component="nav"
+                        aria-labelledby="nested-list-subheader"
+                        subheader={
+                            <Typography color="white" variant="h4" gutterBottom sx={{ mt: 5, mb: 5, ml: 4 }}>
+                                MyTask
+                            </Typography>
+                        }
                     >
-                        <Tab
-                            icon={<SpaceDashboardIcon/>}
-                            iconPosition="start"
-                            sx={{color: "#212121", fontSize: "large", borderRadius: '10%', m:2, mr:0, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}
-                            iconPosition="start"
-                            label="Dashboard"
-                        />
-                        <Tab
-                            icon={<SummarizeIcon/>}
-                            iconPosition="start"
-                            sx={{color: "#212121", fontSize: "large", borderRadius: '10%', m:2, mr:0, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}
-                            iconPosition="start"
-                            label="Reports"
-                        />
-                        <Tab
-                            icon={<AccountTreeIcon/>}
-                            iconPosition="start"
-                            sx={{color: "#212121", fontSize: "large", borderRadius: '10%', m:2, mr:0, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}
-                            iconPosition="start"
-                            label="Projects"
-                        />
-                    </Tabs>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <SpaceDashboardIcon sx={{color:"white"}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" />
+                        </ListItemButton>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <SummarizeIcon sx={{color:"white"}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Reports" />
+                        </ListItemButton>
+                        <ListItemButton onClick={() => setOpen(!open)}>
+                            <ListItemIcon>
+                                <AccountTreeIcon sx={{color:"white"}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Projects" />
+                            {open ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                {projectsLoading ? (
+                                    <CircularProgress/>
+                                ) : (
+                                    projectData.map(project =>
+                                        <ListItemButton sx={{ pl: 4 }}>
+                                            <ListItemIcon>
+                                                <AccountTreeIcon sx={{color:"white"}} />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                key={project.id}
+                                                primary={project.name}
+                                                onClick={() => navigate(`${RoutingConstants.projects}/${project.id}`)}
+                                            />
+                                        </ListItemButton>
+                                )
+                                )}
+                            </List>
+                        </Collapse>
+                    </List>
                 </Box>
                 <Box>
                     <Typography color="white" variant="h1" gutterBottom sx={{ mt: 2 }}>
@@ -152,8 +170,8 @@ import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
                                 <CircularProgress />
                             ) : (
                                 data.slice(0,3).map(task =>
-                                    <Card key={task.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}>
-                                        <Box sx={{ width: '100%', p: 0.5, pl: 1, bgcolor: (theme) => alpha(`${stateColors[task.state]}`, 0.7) }}>
+                                    <Card key={task.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.6), backdropFilter: "blur(10px)" }}>
+                                        <Box sx={{ width: '100%', p: 0.5, pl: 1, bgcolor: (theme) => alpha(`${stateColors[task.state]}`, 0.6), backdropFilter: "blur(10px)" }}>
                                             <Typography color="text.secondary">
                                                 {states[task.state]}
                                             </Typography>
@@ -192,7 +210,7 @@ import {useGetProjectsQuery} from "../../common/slices/getProjects/getProjects";
                             <CircularProgress />
                         ) : (
                             projectData.slice(0,6).map(project =>
-                                <Card key={project.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.7) }}>
+                                <Card key={project.id} sx={{ minWidth: 275, mt: 2, mb: 2, bgcolor: (theme) => alpha('#e3d6d5', 0.6), backdropFilter: "blur(10px)" }}>
                                     <CardContent>
                                         <Typography variant="h5" component="div">
                                             {project.name}
