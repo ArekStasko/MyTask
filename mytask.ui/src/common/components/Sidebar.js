@@ -1,8 +1,6 @@
 import { alpha } from "@mui/system";
 import {
   Box,
-  CircularProgress,
-  Collapse,
   List,
   ListItemButton,
   ListItemIcon,
@@ -10,18 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
-import SummarizeIcon from "@mui/icons-material/Summarize";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import RoutingConstants from "../../routing/RoutingConstants";
 import React from "react";
-import { useGetProjectsQuery } from "../slices/getProjects/getProjects";
 import { useNavigate } from "react-router-dom";
+import RoutingConstants from "../../routing/RoutingConstants";
+import SidebarRaports from "./SidebarRaports";
+import SidebarProjects from "./SidebarProjects";
+import ActionsDialog from "./ActionsDialog";
 
 const Sidebar = () => {
-  const [open, setOpen] = React.useState(false);
-  const { data: projectData, isLoading: projectsLoading } =
-    useGetProjectsQuery();
   const navigate = useNavigate();
 
   return (
@@ -61,39 +55,8 @@ const Sidebar = () => {
             onClick={() => navigate(`${RoutingConstants.dashboard}`)}
           />
         </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <SummarizeIcon sx={{ color: "white" }} />
-          </ListItemIcon>
-          <ListItemText primary="Reports" />
-        </ListItemButton>
-        <ListItemButton onClick={() => setOpen(!open)}>
-          <ListItemIcon>
-            <AccountTreeIcon sx={{ color: "white" }} />
-          </ListItemIcon>
-          <ListItemText primary="Projects" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {projectsLoading ? (
-              <CircularProgress />
-            ) : (
-              projectData.map((project) => (
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <AccountTreeIcon sx={{ color: "white" }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    key={project.id}
-                    primary={project.name}
-                    onClick={() => navigate(`${RoutingConstants.projects}`)}
-                  />
-                </ListItemButton>
-              ))
-            )}
-          </List>
-        </Collapse>
+        <SidebarRaports />
+        <SidebarProjects />
       </List>
     </Box>
   );

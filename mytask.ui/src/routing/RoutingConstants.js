@@ -3,8 +3,11 @@ const RoutingPaths = {
   login: "/login",
   register: "/register",
   dashboard: "/dashboard",
-  projects: "/projects/:id",
-  reports: "/reports/:id",
+  projects: "/projects",
+  raports: "/raports",
+  addTask: "/addTask",
+  addProject: "/addProject",
+  generateRaport: "/generateRaport",
 };
 
 export default RoutingPaths;
