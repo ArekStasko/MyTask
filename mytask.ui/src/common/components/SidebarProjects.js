@@ -24,7 +24,7 @@ const SidebarProjects = () => {
   return (
     <>
       <ListItemButton
-        disabled={projectData.length === 0}
+        disabled={projectData === undefined || projectData.length === 0}
         onClick={() => setOpenProjects(!openProjects)}
       >
         <ListItemIcon>

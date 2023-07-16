@@ -23,7 +23,7 @@ const SidebarRaports = () => {
   return (
     <>
       <ListItemButton
-        disabled={raportData.length === 0}
+        disabled={raportData === undefined || raportData.length === 0}
         onClick={() => setOpenRaports(!openRaports)}
       >
         <ListItemIcon>

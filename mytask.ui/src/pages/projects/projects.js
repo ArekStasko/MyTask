@@ -1,12 +1,14 @@
-import {Container} from "@mui/material";
+import { Container, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-const Projects = () => {
+const Projects = (props) => {
+  const { id } = useParams();
 
-    return (
-        <Container>
-            Projects
-        </Container>
-    )
-}
+  return (
+    <Container>
+      <Typography></Typography>
+    </Container>
+  );
+};
 
 export default Projects;

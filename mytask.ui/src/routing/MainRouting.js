@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import RoutingConstants from "./RoutingConstants";
 import Homepage from "../pages/homepage/homepage";
 import Login from "../pages/login/login";
@@ -10,8 +10,8 @@ import Projects from "../pages/projects/projects";
 import MainLayout from "../common/components/MainLayout";
 import SessionService from "../common/services/sessionService";
 import AddProject from "../pages/addProject/addProject";
-import { AddTask } from "@mui/icons-material";
 import GenerateRaport from "../pages/generateRaport/generateRaport";
+import AddTask from "../pages/addTask/addTask";
 
 const MainRouting = () => (
   <Routes>
