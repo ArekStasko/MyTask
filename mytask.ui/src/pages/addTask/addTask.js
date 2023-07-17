@@ -11,7 +11,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import CardActions from "@mui/material/CardActions";
@@ -21,7 +21,6 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validations from "../../common/validations/validations";
-import { useState } from "react";
 import { useGetProjectsQuery } from "../../common/slices/getProjects/getProjects";
 
 const AddTask = () => {
@@ -39,13 +38,14 @@ const AddTask = () => {
     setValue,
     register,
     formState: { errors },
+    control,
   } = methods;
 
   const areFieldsCorrect = () => {
     const name = methods.getValues("name");
     const project = methods.getValues("project");
     const description = methods.getValues("description");
-    console.log(`project: ${project}`);
+
     if (
       name === undefined ||
       project === undefined ||
@@ -63,17 +63,6 @@ const AddTask = () => {
 
     setValue(id, value);
     trigger(id);
-  };
-
-  const handleSelectChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-    console.log(value);
-    console.log(e);
-
-    setValue("project", projectData[value]);
-    trigger("project");
   };
 
   return (
@@ -130,20 +119,26 @@ const AddTask = () => {
                 />
                 <Box sx={{ width: "100%", mb: 2 }}>
                   <InputLabel id="project-label">Project</InputLabel>
-                  <Select
-                    sx={{ width: "100%" }}
-                    labelId="project-label"
+                  <Controller
+                    defaultValue={""}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        error={!!errors.project}
+                        helperText={errors?.project?.message}
+                        labelId="project-label"
+                        sx={{ width: "100%" }}
+                      >
+                        {projectData.map((project) => (
+                          <MenuItem key={project.id} value={project.id}>
+                            {project.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    )}
                     name="project"
-                    error={!!errors.project}
-                    helperText={errors?.project?.message}
-                    onChange={(e) => handleSelectChange(e)}
-                  >
-                    {projectData.map((project) => (
-                      <MenuItem key={project.id} value={project.id}>
-                        {project.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                    control={control}
+                  />
                 </Box>
                 <TextField
                   sx={{ width: "100%" }}
@@ -155,7 +150,6 @@ const AddTask = () => {
                   rows={5}
                   variant="filled"
                   onChange={(e) => handleChange(e)}
-                  {...register("project")}
                 />
               </FormProvider>
             </Box>
