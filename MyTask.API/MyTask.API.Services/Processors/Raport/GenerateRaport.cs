@@ -1,6 +1,7 @@
-﻿using MyTask.API.Services.Processors.RaportProcessors.Interfaces;
+﻿using System.Data;
+using MyTask.API.DataAccess.Data.Enums;
+using MyTask.API.Services.Processors.RaportProcessors.Interfaces;
 using MyTask.API.DataAccess.Data.Models.Raport;
-using MyTask.API.DataAccess.Repositories.ProjectRepository;
 using MyTask.API.DataAccess.Repositories.RaportRepository;
 using MyTask.API.DataAccess.Repositories.TaskRepository;
 
@@ -9,28 +10,27 @@ namespace MyTask.API.Services.Processors.RaportProcessors;
 public class GenerateRaport : IGenerateRaport
 {
     private IRaportRepository _raportRepository;
-    private IProjectRepository _projectRepository;
     private ITaskRepository _taskRepository;
 
-    public GenerateRaport(IRaportRepository repository)
+    public GenerateRaport(IRaportRepository raportRepository, ITaskRepository taskRepository)
     {
-        _raportRepository = repository;
+        _raportRepository = raportRepository;
+        _taskRepository = taskRepository;
     }
 
     public async Task<IRaport> Execute(int projectId, string userId)
     {
         try
         {
-            var openTasksOperation = _taskRepository.Get(projectId, userId);
-            var inProgressTasksOperation = _taskRepository.Get(projectId, userId);
-            var doneTasksOperation = _taskRepository.Get(projectId, userId);
+            var tasks = await  _taskRepository.Get(projectId, userId);
+
+            if (tasks.Count == 0)
+                throw new NoNullAllowedException($"There is no tasks relatet to {projectId} project");
             
-            await Task.WhenAll(new List<Task>() { openTasksOperation, inProgressTasksOperation, doneTasksOperation });
-
-            var openTasks = await openTasksOperation;
-            var inProgressTasks = await inProgressTasksOperation;
-            var doneTasks = await doneTasksOperation;
-
+            var openTasks = tasks.Where(t => t.State == TaskState.Open).ToList();
+            var inProgressTasks = tasks.Where(t => t.State == TaskState.InProgress).ToList();
+            var doneTasks = tasks.Where(t => t.State == TaskState.Done).ToList();
+            
             var raport = new Raport()
             {
                 OpenTasks = openTasks.Count,
