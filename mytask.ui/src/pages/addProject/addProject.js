@@ -1,4 +1,4 @@
-import { Container, Link, TextField } from "@mui/material";
+import { CircularProgress, Container, TextField } from "@mui/material";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -13,8 +13,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
+import { useCreateProjectMutation } from "../../common/slices/createProject/createProject";
 const AddProject = () => {
   const navigate = useNavigate();
+  const [createProject, { isLoading: createProjectLoading }] =
+    useCreateProjectMutation();
 
   const methods = useForm({
     mode: "onChange",
@@ -33,6 +36,25 @@ const AddProject = () => {
     } = e;
     setValue(id, value);
     trigger(id);
+  };
+
+  const isFieldCorrect = () => {
+    const name = methods.getValues("name");
+    if (name === undefined) return false;
+    if (Object.keys(errors).length !== 0) return false;
+    return true;
+  };
+
+  const createNewProject = async () => {
+    const name = methods.getValues("name");
+    console.log("RUN");
+    try {
+      await createProject({ name });
+      navigate(RoutingPaths.dashboard);
+    } catch (error) {
+      //TODO: write error handling
+      console.error(error);
+    }
   };
 
   return (
@@ -87,9 +109,19 @@ const AddProject = () => {
           >
             Cancel
           </Button>
-          <Button sx={{ m: 2 }} variant="outlined" size="medium">
-            Submit
-          </Button>
+          {createProjectLoading ? (
+            <CircularProgress />
+          ) : (
+            <Button
+              disabled={!isFieldCorrect()}
+              sx={{ m: 2 }}
+              variant="outlined"
+              size="medium"
+              onClick={() => createNewProject()}
+            >
+              Submit
+            </Button>
+          )}
         </CardActions>
       </Card>
     </Container>

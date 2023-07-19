@@ -28,9 +28,14 @@ const addTaskSchema = yup.object().shape({
   description: yup.string().required(),
 });
 
+const generateRaportSchema = yup.object().shape({
+  project: yup.number().required(),
+});
+
 export default {
   registerSchema,
   loginSchema,
   addProjectSchema,
   addTaskSchema,
+  generateRaportSchema,
 };
