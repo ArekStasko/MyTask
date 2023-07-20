@@ -6,6 +6,7 @@ public interface IRaport
 {
     [Key] 
     int Id { get; set; }
+    public string RaportName { get; set; }
     string UserId { get; set; }
     int OpenTasks { get; set; }
     int InProgressTasks { get; set; }

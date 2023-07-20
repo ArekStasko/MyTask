@@ -53,9 +53,8 @@ const GenerateRaport = () => {
 
   const generateNewRaport = async () => {
     const project = methods.getValues("project");
-
     try {
-      await generateRaport({ RaportId: project.id });
+      await generateRaport({ projectId: project });
       navigate(RoutingPaths.dashboard);
     } catch (error) {
       //TODO: write error handling

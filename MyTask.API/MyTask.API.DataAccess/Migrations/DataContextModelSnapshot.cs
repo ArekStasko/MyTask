@@ -59,6 +59,10 @@ namespace MyTask.API.DataAccess.Migrations
                     b.Property<int>("OpenTasks")
                         .HasColumnType("int");
 
+                    b.Property<string>("RaportName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

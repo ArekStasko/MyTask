@@ -43,7 +43,7 @@ const SidebarRaports = () => {
               </ListItemIcon>
               <ListItemText
                 key={raport.id}
-                primary={raport.name}
+                primary={raport.raportName}
                 onClick={() =>
                   navigate(`${RoutingConstants.raports}/${raport.id}`)
                 }

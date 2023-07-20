@@ -62,9 +62,13 @@ const AddTask = () => {
     const name = methods.getValues("name");
     const project = methods.getValues("project");
     const description = methods.getValues("description");
-
+    console.log(project);
     try {
-      await createTask({ project, name, description });
+      await createTask({
+        projectId: project,
+        name: name,
+        description: description,
+      });
       navigate(RoutingPaths.dashboard);
     } catch (error) {
       //TODO: write error handling

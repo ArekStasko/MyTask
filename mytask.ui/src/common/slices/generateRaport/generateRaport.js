@@ -3,11 +3,9 @@ import emptyApi from "../../../app/emptyApi";
 export const generateRaportApi = emptyApi.injectEndpoints({
   endpoints: (build) => ({
     GenerateRaport: build.mutation({
-      query: ({ RaportId, ...rest }) => ({
-        url: "/raports/Generate/",
-        params: { RaportId },
+      query: ({ projectId, ...rest }) => ({
+        url: `/raports/Generate?projectId=${projectId}`,
         method: "POST",
-        body: rest,
       }),
     }),
   }),
