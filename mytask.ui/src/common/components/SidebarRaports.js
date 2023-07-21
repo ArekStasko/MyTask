@@ -30,7 +30,7 @@ const SidebarRaports = () => {
           <SummarizeIcon sx={{ color: "white" }} />
         </ListItemIcon>
         <ListItemText primary="Raports" />
-        {raportData.length > 0 && (
+        {raportData?.length > 0 && (
           <>{openRaports ? <ExpandLess /> : <ExpandMore />}</>
         )}
       </ListItemButton>

@@ -14,10 +14,14 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
 import { useCreateProjectMutation } from "../../common/slices/createProject/createProject";
+import { useContext } from "react";
+import { Context } from "../../store/context";
+
 const AddProject = () => {
   const navigate = useNavigate();
   const [createProject, { isLoading: createProjectLoading }] =
     useCreateProjectMutation();
+  const { setIsAlert, setAlertType } = useContext(Context);
 
   const methods = useForm({
     mode: "onChange",
@@ -47,13 +51,15 @@ const AddProject = () => {
 
   const createNewProject = async () => {
     const name = methods.getValues("name");
-    console.log("RUN");
+
     try {
       await createProject({ name });
       navigate(RoutingPaths.dashboard);
+      setIsAlert(true);
+      setAlertType("success");
     } catch (error) {
-      //TODO: write error handling
-      console.error(error);
+      setIsAlert(true);
+      setAlertType("error");
     }
   };
 

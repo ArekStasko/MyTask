@@ -15,11 +15,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validations from "../../common/validations/validations";
 import { useCreateTaskMutation } from "../../common/slices/createTask/createTask";
 import SelectProject from "../../common/components/selectProject";
+import { useContext } from "react";
+import { Context } from "../../store/context";
 
 const AddTask = () => {
   const [createTask, { isLoading: createTaskLoading }] =
     useCreateTaskMutation();
   const navigate = useNavigate();
+  const { setIsAlert, setAlertType } = useContext(Context);
 
   const methods = useForm({
     mode: "onChange",
@@ -62,7 +65,7 @@ const AddTask = () => {
     const name = methods.getValues("name");
     const project = methods.getValues("project");
     const description = methods.getValues("description");
-    console.log(project);
+
     try {
       await createTask({
         projectId: project,
@@ -70,9 +73,11 @@ const AddTask = () => {
         description: description,
       });
       navigate(RoutingPaths.dashboard);
+      setIsAlert(true);
+      setAlertType("success");
     } catch (error) {
-      //TODO: write error handling
-      console.error(error);
+      setIsAlert(true);
+      setAlertType("error");
     }
   };
 

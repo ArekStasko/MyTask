@@ -31,7 +31,7 @@ const SidebarProjects = () => {
           <AccountTreeIcon sx={{ color: "white" }} />
         </ListItemIcon>
         <ListItemText primary="Projects" />
-        {projectData.length > 0 && (
+        {projectData?.length > 0 && (
           <>{openProjects ? <ExpandLess /> : <ExpandMore />}</>
         )}
       </ListItemButton>

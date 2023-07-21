@@ -13,20 +13,22 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validations from "../../common/validations/validations";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
 import SelectProject from "../../common/components/selectProject";
 import { useGenerateRaportMutation } from "../../common/slices/generateRaport/generateRaport";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../store/context";
 
 const GenerateRaport = () => {
   const [generateRaport, { isLoading: generateRaportLoadng }] =
     useGenerateRaportMutation();
   const navigate = useNavigate();
   const [correct, setCorret] = useState(false);
+  const { setIsAlert, setAlertType } = useContext(Context);
 
   const methods = useForm({
     mode: "onChange",
@@ -53,12 +55,15 @@ const GenerateRaport = () => {
 
   const generateNewRaport = async () => {
     const project = methods.getValues("project");
+
     try {
       await generateRaport({ projectId: project });
       navigate(RoutingPaths.dashboard);
+      setIsAlert(true);
+      setAlertType("success");
     } catch (error) {
-      //TODO: write error handling
-      console.error(error);
+      setIsAlert(true);
+      setAlertType("error");
     }
   };
 
