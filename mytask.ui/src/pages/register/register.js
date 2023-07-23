@@ -17,13 +17,10 @@ import { useRegisterMutation } from "../../common/slices/register/registerSlice"
 import { SaveToken } from "../../common/services/cookieService";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
-import { useContext } from "react";
-import { Context } from "../../store/context";
 
 const Register = () => {
   const [register, { isLoading: registerLoading }] = useRegisterMutation();
   const navigate = useNavigate();
-  const { setIsAlert, setAlertType } = useContext(Context);
 
   const methods = useForm({
     mode: "onChange",
@@ -61,11 +58,8 @@ const Register = () => {
       const result = await register({ username, password });
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
-      setIsAlert(true);
-      setAlertType("success");
     } catch (error) {
-      setIsAlert(true);
-      setAlertType("error");
+      console.log(error);
     }
   };
 

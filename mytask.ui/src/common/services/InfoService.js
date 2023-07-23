@@ -1,23 +1,24 @@
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { useContext } from "react";
-import { Context } from "../../store/context";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsAlert, setAlertType } from "../slices/infoService/infoService";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const InfoService = () => {
-  const { isAlert, alertType, setIsAlert, setAlertType } = useContext(Context);
-
+  const dispatch = useDispatch();
+  const isAlert = useSelector((state) => state.alert.isAlert);
+  const alertType = useSelector((state) => state.alert.alertType);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setIsAlert(false);
-    setAlertType("");
+    dispatch(setIsAlert(false));
+    dispatch(setAlertType(""));
   };
 
   return (
@@ -35,4 +36,4 @@ const InfoService = () => {
   );
 };
 
-export default InfoService();
+export default InfoService;

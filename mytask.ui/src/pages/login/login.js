@@ -17,13 +17,10 @@ import { SaveToken } from "../../common/services/cookieService";
 import { useLoginMutation } from "../../common/slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
-import { useContext } from "react";
-import { Context } from "../../store/context";
 
 const Login = () => {
   const [login, { isLoading: loginLoading }] = useLoginMutation();
   const navigate = useNavigate();
-  const { setIsAlert, setAlertType } = useContext(Context);
 
   const methods = useForm({
     mode: "onChange",
@@ -44,11 +41,8 @@ const Login = () => {
       const result = await login({ username, password });
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
-      setIsAlert(true);
-      setAlertType("success");
     } catch (error) {
-      setIsAlert(true);
-      setAlertType("error");
+      console.log(error);
     }
   };
 
