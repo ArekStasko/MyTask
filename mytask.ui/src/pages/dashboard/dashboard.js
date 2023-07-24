@@ -106,42 +106,46 @@ const Dashboard = () => {
             <Typography color="white" variant="h4" gutterBottom sx={{ mt: 2 }}>
               Upcoming Tasks
             </Typography>
-            {data.slice(0, 3).map((task) => (
-              <Card
-                key={task.id}
-                sx={{
-                  minWidth: 275,
-                  mt: 2,
-                  mb: 2,
-                  bgcolor: (theme) => alpha("#e3d6d5", 0.6),
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                <Box
+            {data.length > 0 ? (
+              data.slice(0, 3).map((task) => (
+                <Card
+                  key={task.id}
                   sx={{
-                    width: "100%",
-                    p: 0.5,
-                    pl: 1,
-                    bgcolor: (theme) =>
-                      alpha(`${stateColors[task.state]}`, 0.6),
+                    minWidth: 275,
+                    mt: 2,
+                    mb: 2,
+                    bgcolor: (theme) => alpha("#e3d6d5", 0.6),
                     backdropFilter: "blur(10px)",
                   }}
                 >
-                  <Typography color="text.secondary">
-                    {states[task.state]}
-                  </Typography>
-                </Box>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {task.name}
-                  </Typography>
-                  <Typography variant="body2">{task.description}</Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">See details</Button>
-                </CardActions>
-              </Card>
-            ))}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      p: 0.5,
+                      pl: 1,
+                      bgcolor: (theme) =>
+                        alpha(`${stateColors[task.state]}`, 0.6),
+                      backdropFilter: "blur(10px)",
+                    }}
+                  >
+                    <Typography color="text.secondary">
+                      {states[task.state]}
+                    </Typography>
+                  </Box>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {task.name}
+                    </Typography>
+                    <Typography variant="body2">{task.description}</Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">See details</Button>
+                  </CardActions>
+                </Card>
+              ))
+            ) : (
+              <></>
+            )}
           </Box>
         </>
       )}

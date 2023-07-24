@@ -17,10 +17,12 @@ import { useRegisterMutation } from "../../common/slices/register/registerSlice"
 import { SaveToken } from "../../common/services/cookieService";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
+import { useAlertService } from "../../common/services/alertSetter";
 
 const Register = () => {
   const [register, { isLoading: registerLoading }] = useRegisterMutation();
   const navigate = useNavigate();
+  const alertService = useAlertService();
 
   const methods = useForm({
     mode: "onChange",
@@ -58,8 +60,9 @@ const Register = () => {
       const result = await register({ username, password });
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
+      alertService.setAlert(true, "success", "You have successfuly register");
     } catch (error) {
-      console.log(error);
+      alertService.setAlert(true, "error", "We ran into some error");
     }
   };
 

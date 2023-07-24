@@ -37,20 +37,21 @@ const SidebarProjects = () => {
       </ListItemButton>
       <Collapse in={openProjects} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {projectData.map((project) => (
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <AccountTreeIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText
-                key={project.id}
-                primary={project.name}
-                onClick={() =>
-                  navigate(`${RoutingConstants.projects}/${project.id}`)
-                }
-              />
-            </ListItemButton>
-          ))}
+          {projectData?.length >= 0 &&
+            projectData.map((project) => (
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <AccountTreeIcon sx={{ color: "white" }} />
+                </ListItemIcon>
+                <ListItemText
+                  key={project.id}
+                  primary={project.name}
+                  onClick={() =>
+                    navigate(`${RoutingConstants.projects}/${project.id}`)
+                  }
+                />
+              </ListItemButton>
+            ))}
         </List>
       </Collapse>
     </>

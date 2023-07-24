@@ -5,6 +5,7 @@ const alertSlice = createSlice({
   initialState: {
     isAlert: false,
     alertType: "",
+    alertMessage: "",
   },
   reducers: {
     setIsAlert: (state, action) => {
@@ -13,8 +14,11 @@ const alertSlice = createSlice({
     setAlertType: (state, action) => {
       state.alertType = action.payload;
     },
+    setAlertMessage: (state, action) => {
+      state.alertMessage = action.payload;
+    },
   },
 });
 
-export const { setIsAlert, setAlertType } = alertSlice.actions;
+export const { setIsAlert, setAlertType, setAlertMessage } = alertSlice.actions;
 export default alertSlice.reducer;

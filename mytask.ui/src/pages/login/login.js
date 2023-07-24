@@ -17,10 +17,12 @@ import { SaveToken } from "../../common/services/cookieService";
 import { useLoginMutation } from "../../common/slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
+import { useAlertService } from "../../common/services/alertSetter";
 
 const Login = () => {
   const [login, { isLoading: loginLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const alertService = useAlertService();
 
   const methods = useForm({
     mode: "onChange",
@@ -41,8 +43,9 @@ const Login = () => {
       const result = await login({ username, password });
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
+      alertService.setAlert(true, "success", "You have successfuly logged in");
     } catch (error) {
-      console.log(error);
+      alertService.setAlert(true, "error", "We ran into some error");
     }
   };
 

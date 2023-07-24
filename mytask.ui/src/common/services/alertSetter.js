@@ -1,4 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setIsAlert, setAlertType } from "../slices/infoService/infoService";
+import { useDispatch } from "react-redux";
+import {
+  setIsAlert,
+  setAlertType,
+  setAlertMessage,
+} from "../slices/infoService/infoService";
 
-export const setAlert = (setValue, alertType) => {};
+export const useAlertService = () => {
+  const dispatch = useDispatch();
+
+  const setAlert = (setValue, alertType, message) => {
+    dispatch(setIsAlert(setValue));
+    dispatch(setAlertType(alertType));
+    dispatch(setAlertMessage(message));
+  };
+
+  return { setAlert };
+};

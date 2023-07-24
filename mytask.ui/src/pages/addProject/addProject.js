@@ -14,16 +14,16 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
 import { useCreateProjectMutation } from "../../common/slices/createProject/createProject";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  setIsAlert,
-  setAlertType,
-} from "../../common/slices/infoService/infoService";
+  AlertService,
+  useAlertService,
+} from "../../common/services/alertSetter";
 
 const AddProject = () => {
   const navigate = useNavigate();
   const [createProject, { isLoading: createProjectLoading }] =
     useCreateProjectMutation();
+  const alertService = useAlertService();
 
   const methods = useForm({
     mode: "onChange",
@@ -57,7 +57,10 @@ const AddProject = () => {
     try {
       await createProject({ name });
       navigate(RoutingPaths.dashboard);
-    } catch (error) {}
+      alertService.setAlert(true, "success", "Project successfuly created");
+    } catch (error) {
+      alertService.setAlert(true, "error", "We ran into some error");
+    }
   };
 
   return (

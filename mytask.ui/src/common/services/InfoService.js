@@ -12,6 +12,7 @@ const InfoService = () => {
   const dispatch = useDispatch();
   const isAlert = useSelector((state) => state.alert.isAlert);
   const alertType = useSelector((state) => state.alert.alertType);
+  const alertMessage = useSelector((state) => state.alert.alertMessage);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -29,7 +30,7 @@ const InfoService = () => {
           severity={alertType}
           sx={{ width: "100%" }}
         >
-          This is a success message!
+          {alertMessage}
         </Alert>
       </Snackbar>
     </>

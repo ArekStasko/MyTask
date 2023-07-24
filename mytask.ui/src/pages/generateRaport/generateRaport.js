@@ -21,12 +21,14 @@ import RoutingPaths from "../../routing/RoutingConstants";
 import SelectProject from "../../common/components/selectProject";
 import { useGenerateRaportMutation } from "../../common/slices/generateRaport/generateRaport";
 import { useContext, useEffect, useState } from "react";
+import { useAlertService } from "../../common/services/alertSetter";
 
 const GenerateRaport = () => {
   const [generateRaport, { isLoading: generateRaportLoadng }] =
     useGenerateRaportMutation();
   const navigate = useNavigate();
   const [correct, setCorret] = useState(false);
+  const alertService = useAlertService();
 
   const methods = useForm({
     mode: "onChange",
@@ -57,8 +59,9 @@ const GenerateRaport = () => {
     try {
       await generateRaport({ projectId: project });
       navigate(RoutingPaths.dashboard);
+      alertService.setAlert(true, "success", "Raport successfuly generated");
     } catch (error) {
-      console.log(error);
+      alertService.setAlert(true, "error", "We ran into some error");
     }
   };
 

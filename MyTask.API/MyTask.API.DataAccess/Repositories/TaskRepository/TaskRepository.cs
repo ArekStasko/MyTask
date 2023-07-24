@@ -78,7 +78,7 @@ public class TaskRepository : ITaskRepository
     {
         try
         {
-            var tasks = _context.Tasks;
+            var tasks = _context.Tasks.Where((t => t.UserId == userId));
             return await tasks.ToListAsync<ITask>();
         }
         catch (Exception ex)

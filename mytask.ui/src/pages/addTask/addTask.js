@@ -16,11 +16,13 @@ import validations from "../../common/validations/validations";
 import { useCreateTaskMutation } from "../../common/slices/createTask/createTask";
 import SelectProject from "../../common/components/selectProject";
 import { useContext } from "react";
+import { useAlertService } from "../../common/services/alertSetter";
 
 const AddTask = () => {
   const [createTask, { isLoading: createTaskLoading }] =
     useCreateTaskMutation();
   const navigate = useNavigate();
+  const alertService = useAlertService();
 
   const methods = useForm({
     mode: "onChange",
@@ -71,8 +73,9 @@ const AddTask = () => {
         description: description,
       });
       navigate(RoutingPaths.dashboard);
+      alertService.setAlert(true, "success", "Task successfuly created");
     } catch (error) {
-      console.log(error);
+      alertService.setAlert(true, "error", "We ran into some error");
     }
   };
 
