@@ -23,8 +23,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    const currentMinute = currentDate.getMinutes();
+    const currentHour = ("0" + currentDate.getHours()).slice(-2);
+    const currentMinute = ("0" + currentDate.getMinutes()).slice(-2);
     setCurrentTime(`${currentHour}:${currentMinute}`);
   }, []);
 
@@ -32,16 +32,16 @@ const Dashboard = () => {
     setInterval(() => {
       const currentDate = new Date();
 
-      const currentHour = currentDate.getHours();
-      const currentMinute = currentDate.getMinutes();
+      const currentHour = ("0" + currentDate.getHours()).slice(-2);
+      const currentMinute = ("0" + currentDate.getMinutes()).slice(-2);
       setCurrentTime(`${currentHour}:${currentMinute}`);
     }, 60000);
   }, []);
 
   const getCurrentDate = () => {
     const currentDate = new Date();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
+    const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ("0" + currentDate.getDate()).slice(-2);
     return `${day}/${month}`;
   };
 
@@ -100,7 +100,7 @@ const Dashboard = () => {
               height: "100%",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "flex-start",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
