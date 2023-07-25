@@ -32,6 +32,8 @@ const Login = () => {
   const {
     trigger,
     setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = methods;
 
@@ -41,6 +43,16 @@ const Login = () => {
 
     try {
       const result = await login({ username, password });
+      if (result.error.status === "FETCH_ERROR") {
+        alertService.setAlert(
+          true,
+          "error",
+          "You have provided wrong credentials"
+        );
+        setError("username", { message: "Wrong Value" });
+        setError("password", { message: "Wrong Value" });
+        return;
+      }
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
       alertService.setAlert(true, "success", "You have successfuly logged in");
@@ -59,6 +71,9 @@ const Login = () => {
   };
 
   const handleChange = (e) => {
+    clearErrors("username");
+    clearErrors("password");
+
     const {
       target: { value, id },
     } = e;

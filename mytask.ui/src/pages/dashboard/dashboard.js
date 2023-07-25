@@ -15,6 +15,7 @@ import { useGetTasksQuery } from "../../common/slices/getTasks/getTasks";
 import { stateColors } from "../../common/services/taskStateService";
 import { states } from "../../common/services/taskStateService";
 import ActionsDialog from "../../common/components/ActionsDialog";
+import LogoutButton from "../../common/components/LogoutButton";
 
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState();
@@ -52,7 +53,7 @@ const Dashboard = () => {
       sx={{
         height: "100%",
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "flex-end",
         m: "0",
         p: "0",
@@ -147,6 +148,7 @@ const Dashboard = () => {
               <></>
             )}
           </Box>
+          <LogoutButton />
         </>
       )}
     </Container>

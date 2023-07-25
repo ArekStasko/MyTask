@@ -18,6 +18,7 @@ import { SaveToken } from "../../common/services/cookieService";
 import { useNavigate } from "react-router-dom";
 import RoutingPaths from "../../routing/RoutingConstants";
 import { useAlertService } from "../../common/services/alertSetter";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const Register = () => {
   const [register, { isLoading: registerLoading }] = useRegisterMutation();
@@ -32,6 +33,8 @@ const Register = () => {
   const {
     trigger,
     setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = methods;
 
@@ -58,6 +61,15 @@ const Register = () => {
 
     try {
       const result = await register({ username, password });
+      if (result.error.status === "FETCH_ERROR") {
+        alertService.setAlert(
+          true,
+          "error",
+          "There is already user with provided username"
+        );
+        setError("username", { message: "Provide other username" });
+        return;
+      }
       SaveToken(result.error.data);
       navigate(RoutingPaths.dashboard);
       alertService.setAlert(true, "success", "You have successfuly register");
@@ -67,6 +79,7 @@ const Register = () => {
   };
 
   const handleChange = (e) => {
+    clearErrors("username");
     const {
       target: { value, id },
     } = e;

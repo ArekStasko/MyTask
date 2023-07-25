@@ -35,9 +35,11 @@ const MainRouting = () => (
     <Route
       path={RoutingConstants.dashboard}
       element={
-        <MainLayout>
-          <Dashboard />
-        </MainLayout>
+        <SessionService>
+          <MainLayout>
+            <Dashboard />
+          </MainLayout>
+        </SessionService>
       }
     />
     <Route

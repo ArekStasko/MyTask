@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SessionService from "../services/sessionService";
 import Sidebar from "./Sidebar";
 import dashboard from "../../imgs/dashboard.png";
 import { Container } from "@mui/material";
-import { alpha } from "@mui/system";
 
 const MainLayout = (props) => {
   const [stage, setStage] = useState("dashboard");
@@ -31,10 +29,8 @@ const MainLayout = (props) => {
         backdropFilter: "blur(10px)",
       }}
     >
-      <SessionService>
-        <Sidebar />
-        {props.children}
-      </SessionService>
+      <Sidebar />
+      {props.children}
     </Container>
   );
 };
